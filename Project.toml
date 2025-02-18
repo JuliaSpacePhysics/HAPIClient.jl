@@ -1,0 +1,7 @@
+name = "HAPI"
+uuid = "0ce0b37c-8851-4c5b-98a3-e691a5f19c53"
+authors = ["Beforerr <zzj956959688@gmail.com> and contributors"]
+version = "1.0.0-DEV"
+
+[compat]
+julia = "1.10"
