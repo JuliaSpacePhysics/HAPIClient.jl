@@ -35,8 +35,8 @@ HAPI info response JSON structure: https://github.com/hapi-server/data-specifica
 """
 function get_parameters(server, dataset)
     url = string(server) * "/info"
-    params = Dict("id" => dataset)
-    response = HTTP.get(url; query=params)
+    query = Dict("id" => dataset)
+    response = HTTP.get(url; query)
     return JSON.parse(String(response.body))
 end
 
