@@ -19,3 +19,13 @@ end
 
     @test_nowarn data, meta = hapi(server, dataset, parameters, tmin, tmax)
 end
+
+@testset "CDAWeb" begin
+    server = CDAWeb
+    dataset = "AC_H0_MFI"
+    parameters = "Magnitude,BGSEc"
+    tmin = "2001-01-01T05:00:00"
+    tmax = "2001-01-01T06:00:00"
+
+    @test_nowarn data, meta = hapi(server, dataset, parameters, tmin, tmax)
+end
