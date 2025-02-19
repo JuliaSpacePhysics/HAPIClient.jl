@@ -1,6 +1,10 @@
 using HAPI
 using Test
 
-@testset "HAPI.jl" begin
-    # Write your tests here.
+@testset "Data" begin
+    include("data.jl")
+end
+
+@testset "Metadata" begin
+    include("metadata.jl")
 end
