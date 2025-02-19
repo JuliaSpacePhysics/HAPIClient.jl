@@ -5,6 +5,9 @@ using JSON
 using Dates
 using CSV
 using Tables
+using Unitful
+import Base: getproperty, propertynames, getindex, show
+import Unitful: unit
 
 export hapi
 export CDAWeb, CSA
