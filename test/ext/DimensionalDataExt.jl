@@ -10,7 +10,7 @@ using DimensionalData
     tmax = "1970-01-01T00:00:10"
 
     data, meta = hapi(server, dataset, parameters, tmin, tmax; format="csv")
-    hapi_parameters = HAPIParameters(data, meta)
+    hapi_parameters = HAPIVariables(data, meta)
     ds = DimStack(hapi_parameters)
     @test length(layers(ds)) == 2
     @test length(ds) == 10

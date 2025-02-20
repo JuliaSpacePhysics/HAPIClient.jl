@@ -9,9 +9,9 @@ using Unitful
 import Base: getproperty, propertynames, getindex, show
 import Unitful: unit
 
-export hapi
+export hapi, get_data
 export CDAWeb, CSA
-export HAPIParameter, HAPIParameters
+export HAPIVariable, HAPIVariables
 
 include("server.jl")
 include("metadata.jl")

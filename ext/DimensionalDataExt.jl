@@ -6,11 +6,11 @@ using HAPI: colsize
 import DimensionalData: DimArray, DimStack
 
 """
-    DimArray(v::HAPIParameter; unit=unit(v), add_axes=true)
+    DimArray(v::HAPIVariable; unit=unit(v), add_axes=true)
 
-Convert a `HAPIParameter` to a `DimArray`.
+Convert a `HAPIVariable` to a `DimArray`.
 """
-function DimensionalData.DimArray(v::HAPIParameter; unit=unit(v))
+function DimensionalData.DimArray(v::HAPIVariable; unit=unit(v))
     name = Symbol(v.name)
     if ndims(v.values) == 1
         dims = (Ti(v.time),)
@@ -22,6 +22,6 @@ function DimensionalData.DimArray(v::HAPIParameter; unit=unit(v))
     DimArray(v.values * unit, dims; name, metadata)
 end
 
-DimStack(vs::AbstractArray{HAPIParameter}) = DimStack(DimArray.(vs)...)
+DimStack(vs::AbstractArray{HAPIVariable}) = DimStack(DimArray.(vs)...)
 
 end
