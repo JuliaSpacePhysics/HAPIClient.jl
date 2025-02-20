@@ -13,6 +13,17 @@ end
 CDAWeb = Server(; url="https://cdaweb.gsfc.nasa.gov/hapi", id="CDAWeb", title="CDAWeb")
 CSA = Server(; url="https://csatools.esac.esa.int/HapiServer/hapi", id="CSA", title="Cluster Science Archive", HAPI="3.2", format="csv")
 
+# Define available servers
+const SERVERS = Dict{String,Server}()
+
+register_server!(server::Server) = (SERVERS[server.id] = server)
+# Register default servers
+register_server!(CDAWeb)
+register_server!(CSA)
+
+"""Get a HAPI server instance by its ID."""
+Server(id) = SERVERS[uppercase(id)]
+
 Base.string(s::Server) = getfield(s, :url)
 format(s::Server) = getfield(s, :format)
 """Default format for HAPI servers."""

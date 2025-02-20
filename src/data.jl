@@ -36,3 +36,22 @@ function get_data(server, dataset, parameters, tmin, tmax; format=format(server)
     meta = get_parameters(server, dataset, parameters)
     return data, meta
 end
+
+"""
+    get_data(path, tmin, tmax; kwargs...)
+
+Get data and metadata using a `path` in the format "server/dataset/parameter".
+"""
+function get_data(path, tmin, tmax; kwargs...)
+    # Split path into components
+    parts = split(path, "/")
+    length(parts) != 3 && throw(ArgumentError("Path must be in format 'server/dataset/parameter'"))
+    server_id, dataset, parameters = parts
+    server = Server(server_id)
+
+    # Call the main get_data function
+    return get_data(server, dataset, parameters, tmin, tmax; kwargs...)
+end
+
+get_data(server, dataset, parameters, trange; kwargs...) = get_data(server, dataset, parameters, first(trange), last(trange); kwargs...)
+get_data(path, trange; kwargs...) = get_data(path, first(trange), last(trange); kwargs...)
