@@ -1,6 +1,6 @@
-struct HAPIVariable{T<:AbstractArray}
+struct HAPIVariable
     time::AbstractVector
-    values::T
+    values::AbstractArray
     meta::Dict
 end
 
@@ -18,7 +18,7 @@ colsize(param) = get(param, "size", 1) |> only
 
 Construct a `HAPIVariable` object from CSV.File `data` and `meta` at index `i`.
 """
-function HAPIVariable(data::CSV.File, meta, i::Integer)
+function HAPIVariable(data::CSV.File, meta, i::Integer; merge_metadata=true)
     time = Tables.getcolumn(data, 1)
     params = meta["parameters"]
     param = params[i+1]
@@ -31,7 +31,8 @@ function HAPIVariable(data::CSV.File, meta, i::Integer)
         cols = coloffset:(coloffset+size-1)
         map(row -> getindex.(Ref(row), cols), data)
     end
-    HAPIVariable(time, values, param)
+    final_meta = merge_metadata ? delete!(merge(meta, param), "parameters") : param
+    HAPIVariable(time, values, final_meta)
 end
 
 """
@@ -39,11 +40,12 @@ end
 
 Construct a `HAPIVariable` object from a JSON-parsed `data` and `meta` at index `i`.
 """
-function HAPIVariable(data, meta, i::Integer)
+function HAPIVariable(data, meta, i::Integer; merge_metadata=true)
     time = @. DateTime(getindex(data, 1), DEFAULT_DATE_FORMAT)
     param = meta["parameters"][i+1]
     values = getindex.(data, i + 1)
-    HAPIVariable(time, values, param)
+    final_meta = merge_metadata ? delete!(merge(meta, param), "parameters") : param
+    HAPIVariable(time, values, final_meta)
 end
 
 hapi_properties = (:name, :columns, :units,)

@@ -34,7 +34,7 @@ function get_data(server, dataset, parameters, tmin, tmax; format=format(server)
         throw("Unsupported format: $format")
     end
     meta = get_parameters(server, dataset, parameters)
-    return data, meta
+    return HAPIVariables(data, meta)
 end
 
 """
