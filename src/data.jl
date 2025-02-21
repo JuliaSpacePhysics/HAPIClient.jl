@@ -22,7 +22,8 @@ function get_data(server, dataset, parameters, tmin, tmax; format=format(server)
         "time.max" => tmax,
         "format" => format
     )
-    response = HTTP.get(url; query)
+    uri = HTTP.request_uri(url, query)
+    response = HTTP.get(uri)
 
     data = if format == "csv"
         CSV.File(response.body; header=false, dateformat=DEFAULT_DATE_FORMAT)
@@ -34,6 +35,7 @@ function get_data(server, dataset, parameters, tmin, tmax; format=format(server)
         throw("Unsupported format: $format")
     end
     meta = get_parameters(server, dataset, parameters)
+    meta["uri"] = uri
     return HAPIVariables(data, meta)
 end
 
