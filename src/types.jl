@@ -48,6 +48,21 @@ function HAPIVariable(data, meta, i::Integer; merge_metadata=true)
     HAPIVariable(time, values, final_meta)
 end
 
+"""
+    HAPIVariable(d, i)
+
+Construct a `HAPIVariable` object from a JSON-parsed Dict `d` (containing parameters) at index `i`.
+"""
+function HAPIVariable(d::Dict, i::Integer)
+    data = d["data"]
+    param = d["parameters"][i+1]
+    time = @. DateTime(getindex(data, 1), DEFAULT_DATE_FORMAT)
+    values = getindex.(data, i + 1)
+    HAPIVariable(time, values, param)
+end
+
+HAPIVariable(d::Dict, meta, i::Integer) = HAPIVariable(d, i)
+
 hapi_properties = (:name, :columns, :units,)
 
 meta(var::HAPIVariable) = get_field(var, :meta)
