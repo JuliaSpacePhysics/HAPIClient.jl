@@ -1,6 +1,6 @@
-# HAPI
+# HAPIClient
 
-[![Build Status](https://github.com/Beforerr/HAPI.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/Beforerr/HAPI.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Build Status](https://github.com/Beforerr/HAPIClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/Beforerr/HAPIClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
 
 A Julia client for the Heliophysics Application Programmer's Interface (HAPI).
 
@@ -8,5 +8,4 @@ A Julia client for the Heliophysics Application Programmer's Interface (HAPI).
 
 ```julia
 using Pkg
-Pkg.add("https://github.com/Beforerr/HAPI.jl")
-```
+Pkg.add("https://github.com/Beforerr/HAPIClient.jl")

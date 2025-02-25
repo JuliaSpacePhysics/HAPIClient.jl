@@ -1,4 +1,4 @@
-using HAPI
+using HAPIClient
 using Test
 using DimensionalData
 

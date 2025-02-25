@@ -1,8 +1,8 @@
 module DimensionalDataExt
 using DimensionalData
-using HAPI
+using HAPIClient
 using Unitful
-using HAPI: colsize
+using HAPIClient: colsize
 import DimensionalData: DimArray, DimStack
 
 """

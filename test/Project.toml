@@ -1,4 +1,4 @@
 [deps]
 DimensionalData = "0703355e-b756-11e9-17c0-8b28908087d0"
-HAPI = "0ce0b37c-8851-4c5b-98a3-e691a5f19c53"
+HAPIClient = "0ce0b37c-8851-4c5b-98a3-e691a5f19c53"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

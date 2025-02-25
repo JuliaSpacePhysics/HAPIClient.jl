@@ -4,7 +4,7 @@
 
     meta = hapi(server, dataset)
     parameters = meta["parameters"]
-    @test HAPI.parameters(parameters)[1].name == "Time"
+    @test HAPIClient.parameters(parameters)[1].name == "Time"
 end
 
 
