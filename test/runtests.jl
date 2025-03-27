@@ -1,6 +1,10 @@
 using HAPIClient
 using Test
 
+@testset "Aqua" begin
+    include("Aqua.jl")
+end
+
 @testset "Data" begin
     include("data.jl")
 end
