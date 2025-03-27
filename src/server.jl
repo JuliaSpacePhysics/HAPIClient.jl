@@ -16,7 +16,7 @@ CSA = Server(; url="https://csatools.esac.esa.int/HapiServer/hapi", id="CSA", ti
 # Define available servers
 const SERVERS = Dict{String,Server}()
 
-register_server!(server::Server) = (SERVERS[server.id] = server)
+register_server!(server::Server) = (SERVERS[uppercase(server.id)] = server)
 # Register default servers
 register_server!(CDAWeb)
 register_server!(CSA)
