@@ -1,6 +1,7 @@
 # HAPIClient
 
 [![Build Status](https://github.com/Beforerr/HAPIClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/Beforerr/HAPIClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![DOI](https://zenodo.org/badge/935193759.svg)](https://doi.org/10.5281/zenodo.15108960)
 
 A Julia client for the Heliophysics Application Programmer's Interface (HAPI).
 
