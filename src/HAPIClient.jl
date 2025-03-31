@@ -16,6 +16,7 @@ export HAPIVariable, HAPIVariables
 include("server.jl")
 include("metadata.jl")
 include("data.jl")
+include("specs/time.jl")
 include("specs/parameter.jl")
 include("utils.jl")
 include("types.jl")

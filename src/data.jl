@@ -1,4 +1,3 @@
-const DEFAULT_DATE_FORMAT = DateFormat("yyyy-mm-ddTHH:MM:SS.sssZ")
 
 """
     get_data(server, dataset, parameters, tmin, tmax; format="csv")
@@ -10,8 +9,8 @@ Supported data formats: "csv", "binary", "json".
 function get_data(server, dataset, parameters, tmin, tmax; format=format(server))
 
     # Validate time format
-    tmin = Dates.format(DateTime(tmin), DEFAULT_DATE_FORMAT)
-    tmax = Dates.format(DateTime(tmax), DEFAULT_DATE_FORMAT)
+    tmin = HAPIDateTime(tmin)
+    tmax = HAPIDateTime(tmax)
 
     # Construct URL and make request
     url = string(server) * "/data"
