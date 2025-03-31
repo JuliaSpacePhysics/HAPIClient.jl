@@ -9,7 +9,7 @@ A Julia client for the Heliophysics Application Programmer's Interface (HAPI).
 
 ```julia
 using Pkg
-Pkg.add("https://github.com/Beforerr/HAPIClient.jl")
+Pkg.add("HAPIClient")
 ```
 
 ## Usage Example
