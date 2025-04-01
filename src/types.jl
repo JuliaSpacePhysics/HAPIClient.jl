@@ -1,8 +1,17 @@
-struct HAPIVariable
+using SpaceDataModel: AbstractDataVariable
+import SpaceDataModel: name
+
+struct HAPIVariable{T,N} <: AbstractDataVariable{T,N}
     time::AbstractVector
-    values::AbstractArray
+    values::AbstractArray{T,N}
     meta::Dict
 end
+
+function HAPIVariable(time, values::AbstractArray{T,N}, meta) where {T,N}
+    HAPIVariable{T,N}(time, values, meta)
+end
+
+Base.parent(var::HAPIVariable) = var.values
 
 function HAPIVariables(data, meta)
     params = meta["parameters"]
@@ -65,7 +74,6 @@ HAPIVariable(d::Dict, meta, i::Integer) = HAPIVariable(d, i)
 
 hapi_properties = (:name, :columns, :units,)
 
-meta(var::HAPIVariable) = get_field(var, :meta)
 name(var::HAPIVariable) = get(var.meta, "name", "")
 columns(var::HAPIVariable) = var.meta["columns"]
 colsize(var::HAPIVariable) = colsize(var.meta)
@@ -74,18 +82,6 @@ function Base.getproperty(var::HAPIVariable, s::Symbol)
     s in (:time, :values, :meta) && return getfield(var, s)
     s in hapi_properties && return eval(s)(var)
     return getproperty(var.py, s)
-end
-
-function Base.show(io::IO, var::T) where {T<:HAPIVariable}
-    println(io, "$T:")
-    println(io, "  Name: ", name(var))
-    println(io, "  Time Range: ", var.time[1], " to ", var.time[end])
-    println(io, "  Units: ", unit(var))
-    println(io, "  Shape: ", size(var.values))
-    println(io, "  Metadata:")
-    for (key, value) in sort(collect(var.meta), by=x -> x[1])
-        println(io, "    ", key, ": ", value)
-    end
 end
 
 function Unitful.unit(var::HAPIVariable)
