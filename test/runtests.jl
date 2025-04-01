@@ -8,13 +8,33 @@ using TestItems, TestItemRunner
     include("Aqua.jl")
 end
 
-@testset "DateTime" begin
+@testitem "DateTime" begin
     using HAPIClient: HAPIDateTime
     @test HAPIDateTime("2001-01-01") == "2001-01-01T00:00:00.000Z"
     @test HAPIDateTime("2001-01-01T05:00:00Z") == "2001-01-01T05:00:00.000Z"
     @test HAPIDateTime("1999-01Z") == "1999-01-01T00:00:00.000Z"
     @test HAPIDateTime("1999-032T02:03:05Z") == "1999-02-01T02:03:05.000Z"
     @test HAPIDateTime("1999-032T02:04") == "1999-02-01T02:04:00.000Z"
+
+    dts = [
+        "1989Z", "1989-01Z", "1989-001Z",
+        "1989-01-01Z", "1989-001T00Z",
+        "1989-01-01T00Z", "1989-001T00:00Z",
+        "1989-01-01T00:00Z", "1989-001T00:00:00.Z",
+        "1989-01-01T00:00:00.Z", "1989-01-01T00:00:00.0Z",
+        "1989-001T00:00:00.0Z", "1989-01-01T00:00:00.00Z",
+        "1989-001T00:00:00.00Z", "1989-01-01T00:00:00.000Z",
+        "1989-001T00:00:00.000Z", "1989-01-01T00:00:00.0000Z",
+        "1989-001T00:00:00.0000Z", "1989-01-01T00:00:00.00000Z",
+        "1989-001T00:00:00.00000Z", "1989-01-01T00:00:00.000000Z",
+        "1989-001T00:00:00.000000Z"
+    ]
+
+    expected = "1989-01-01T00:00:00.000Z"
+
+    for dt in dts
+        @test HAPIDateTime(dt) == expected
+    end
 end
 
 @testset "Metadata" begin
