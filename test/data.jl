@@ -1,6 +1,4 @@
-using Test
-
-@testset "TestData2.0" begin
+@testitem "TestData2.0" begin
     server = "http://hapi-server.org/servers/TestData2.0/hapi"
     dataset = "dataset1"
     parameters = "scalar,vector"
@@ -10,7 +8,7 @@ using Test
     @test_nowarn hapi(server, dataset, parameters, tmin, tmax)
 end
 
-@testset "CSA" begin
+@testitem "CSA" begin
     server = CSA
     dataset = "C4_CP_FGM_FULL"
     parameters = "B_vec_xyz_gse,B_mag"
@@ -20,7 +18,7 @@ end
     @test_nowarn hapi(server, dataset, parameters, tmin, tmax)
 end
 
-@testset "CDAWeb" begin
+@testitem "CDAWeb" begin
     server = CDAWeb
     dataset = "AC_H0_MFI"
     parameters = "Magnitude,BGSEc"
