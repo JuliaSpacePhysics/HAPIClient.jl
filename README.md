@@ -5,6 +5,8 @@
 
 A Julia client for the Heliophysics Application Programmer's Interface (HAPI).
 
+See [HAPI Server Browser](https://hapi-server.org/servers/) for a list of HAPI servers and datasets.
+
 ## Installation
 
 ```julia
