@@ -13,7 +13,7 @@ function HAPIVariables(data, meta)
     return n == 1 ? first(vars) : vars
 end
 
-colsize(param) = get(param, "size", 1) |> only
+colsize(param) = prod(get(param, "size", 1))
 
 """
     HAPIVariable(data, meta, i)
