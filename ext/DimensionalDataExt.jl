@@ -2,26 +2,26 @@ module DimensionalDataExt
 using DimensionalData
 using HAPIClient
 using Unitful
-using HAPIClient: colsize
+using HAPIClient: colsize, name, meta
 import DimensionalData: DimArray, DimStack
 
 """
-    DimArray(v::HAPIVariable; unit=unit(v), add_axes=true)
+    DimArray(v::HAPIVariable; add_unit=true)
 
 Convert a `HAPIVariable` to a `DimArray`.
 """
-function DimensionalData.DimArray(v::HAPIVariable; unit=unit(v))
-    name = Symbol(v.name)
-    if ndims(v.values) == 1
+function DimensionalData.DimArray(v::HAPIVariable; add_unit=true)
+    values = add_unit ? parent(v) * unit(v) : parent(v)
+    if ndims(v) == 1
         dims = (Ti(v.time),)
-    elseif ndims(v.values) == 2
-        odim = Dim{name}(get(v.meta, "label", 1:colsize(v)))
+    elseif ndims(v) == 2
+        odim = Y(get(meta(v), "label", 1:colsize(v)))
         dims = (Ti(v.time), odim)
     end
-    metadata = Dict{Any,Any}(v.meta)
-    DimArray(v.values * unit, dims; name, metadata)
+    metadata = Dict{Any,Any}(meta(v))
+    DimArray(values, dims; name=Symbol(name(v)), metadata)
 end
 
-DimStack(vs::AbstractArray{HAPIVariable}) = DimStack(DimArray.(vs)...)
+DimStack(vs::AbstractArray{<:HAPIVariable}) = DimStack(DimArray.(vs)...)
 
 end
