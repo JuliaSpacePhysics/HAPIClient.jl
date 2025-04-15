@@ -8,6 +8,16 @@
     @test_nowarn hapi(server, dataset, parameters, tmin, tmax)
 end
 
+@testitem "TestData2.1" begin
+    server = "http://hapi-server.org/servers/TestData2.1/hapi"
+    dataset = "dataset1"
+    parameters = ""
+    start = "1970-01-01"
+    stop = "1970-01-01T00:00:11"
+
+    @test_nowarn hapi(server, dataset, parameters, start, stop)
+end
+
 @testitem "TestData3.0" begin
     server = "http://hapi-server.org/servers/TestData3.0/hapi"
     dataset = "dataset1"

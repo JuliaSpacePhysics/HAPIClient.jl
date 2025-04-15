@@ -69,6 +69,14 @@ name(var::HAPIVariable) = get(meta(var), "name", "")
 columns(var::HAPIVariable) = meta(var)["columns"]
 colsize(var::HAPIVariable) = colsize(meta(var))
 
-function Unitful.unit(var::HAPIVariable)
-    get(meta(var), "units", 1) |> uparse
+# when units have more than one value, return an array
+function hapi_uparse(u)
+    isnothing(u) && return 1
+    u == "UTC" && return 1
+    u == "degrees" && return u"°"
+    uparse(u)
 end
+hapi_uparse(units::AbstractArray) = hapi_uparse.(units)
+
+units(var::HAPIVariable) = get(meta(var), "units", nothing)
+Unitful.unit(var::HAPIVariable) = hapi_uparse.(units(var))
