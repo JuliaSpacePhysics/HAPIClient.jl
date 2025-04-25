@@ -4,8 +4,6 @@ struct HAPIVariable{T,N,A<:AbstractArray{T,N},Tt<:AbstractVector} <: AbstractDat
     meta::Dict
 end
 
-Base.parent(var::HAPIVariable) = var.data
-
 function HAPIVariables(data, meta)
     params = meta["parameters"]
     n = length(params) - 1
@@ -78,5 +76,4 @@ function hapi_uparse(u)
 end
 hapi_uparse(units::AbstractArray) = hapi_uparse.(units)
 
-units(var::HAPIVariable) = get(meta(var), "units", nothing)
 Unitful.unit(var::HAPIVariable) = hapi_uparse.(units(var))
