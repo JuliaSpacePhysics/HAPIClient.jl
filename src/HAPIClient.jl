@@ -7,9 +7,8 @@ using CSV
 using Tables
 using Unitful
 using SpaceDataModel: AbstractDataVariable, parse_datetime
-import Base: getproperty, propertynames, getindex, show
 import Unitful: unit
-import SpaceDataModel: name, meta
+import SpaceDataModel: name, meta, units
 
 export hapi, get_data
 export HAPIVariable, HAPIVariables
