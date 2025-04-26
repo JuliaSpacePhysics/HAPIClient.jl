@@ -1,4 +1,4 @@
-import Base: string
+import Base: /
 
 const DEFAULT_SERVERS_JSON_URL = "https://raw.githubusercontent.com/hapi-server/servers/refs/heads/master/servers.json"
 const DEFAULT_FORMAT = "csv"
@@ -23,7 +23,7 @@ register_server!(server::Server) = (SERVERS[uppercase(server.id)] = server)
 """Get a HAPI server instance by its ID."""
 Server(id) = SERVERS[uppercase(id)]
 
-Base.string(s::Server) = getfield(s, :url)
+(/)(s::Server, t::AbstractString) = "$(url(s))/$t"
 format(s::Server) = getfield(s, :format)
 """Default format for HAPI servers."""
 format(s) = DEFAULT_FORMAT
@@ -34,7 +34,7 @@ format(s) = DEFAULT_FORMAT
 Get server capabilities.
 """
 function get_capabilities(server)
-    url = string(server) * "/capabilities"
+    url = server / "capabilities"
     response = HTTP.get(url)
     return JSON.parse(String(response.body))
 end

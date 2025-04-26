@@ -19,7 +19,7 @@ Get a list of datasets available from the server.
 HAPI info response JSON structure: https://github.com/hapi-server/data-specification/blob/master/hapi-dev/HAPI-data-access-spec-dev.md#35-catalog
 """
 function get_catalog(server)
-    url = string(server) * "/catalog"
+    url = server / "catalog"
     response = HTTP.get(url)
     return JSON.parse(String(response.body))
 end
@@ -34,7 +34,7 @@ a Vector of Parameter objects.
 HAPI info response JSON structure: https://github.com/hapi-server/data-specification/blob/master/hapi-dev/HAPI-data-access-spec-dev.md#36-info
 """
 function get_parameters(server, dataset)
-    url = string(server) * "/info"
+    url = server / "info"
     query = Dict("id" => dataset)
     response = HTTP.get(url; query)
     return JSON.parse(String(response.body))
@@ -46,7 +46,7 @@ end
 Get a dictionary containing the HAPI info metadata for each parameter in the comma-separated string `parameters`.
 """
 function get_parameters(server, dataset, parameters)
-    url = string(server) * "/info"
+    url = server / "info"
     params = Dict("id" => dataset, "parameters" => parameters)
     response = HTTP.get(url; query=params)
     return JSON.parse(String(response.body))
