@@ -13,6 +13,10 @@ abstract type AbstractServer end
     format::String = DEFAULT_FORMAT
 end
 
+url(s) = s
+url(s::Server) = s.url
+url(s, t) = "$(url(s))/$t"
+(/)(s::Server, t::AbstractString) = url(s, t)
 # CSA = Server(; url="https://csatools.esac.esa.int/HapiServer/hapi", id="CSA", title="Cluster Science Archive", HAPI="3.2", format="csv")
 
 # Define available servers
@@ -23,7 +27,6 @@ register_server!(server::Server) = (SERVERS[uppercase(server.id)] = server)
 """Get a HAPI server instance by its ID."""
 Server(id) = SERVERS[uppercase(id)]
 
-(/)(s::Server, t::AbstractString) = "$(url(s))/$t"
 format(s::Server) = getfield(s, :format)
 """Default format for HAPI servers."""
 format(s) = DEFAULT_FORMAT
@@ -34,8 +37,7 @@ format(s) = DEFAULT_FORMAT
 Get server capabilities.
 """
 function get_capabilities(server)
-    url = server / "capabilities"
-    response = HTTP.get(url)
+    response = HTTP.get(url(server, "capabilities"))
     return JSON.parse(String(response.body))
 end
 

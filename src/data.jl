@@ -13,7 +13,7 @@ function get_data(server, dataset, parameters, tmin, tmax; format=format(server)
     tmax = HAPIDateTime(tmax)
 
     # Construct URL and make request
-    url = server / "data"
+    url = HAPIClient.url(server, "data")
     query = Dict(
         "id" => dataset,
         "parameters" => parameters,
