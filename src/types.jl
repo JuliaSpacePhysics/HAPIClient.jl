@@ -63,7 +63,7 @@ end
 
 HAPIVariable(d::Dict, meta, i::Integer) = HAPIVariable(d, i)
 
-name(var::HAPIVariable) = get(meta(var), "name", "")
+name(var::HAPIVariable) = get(var, "name", "")
 columns(var::HAPIVariable) = meta(var)["columns"]
 colsize(var::HAPIVariable) = colsize(meta(var))
 
