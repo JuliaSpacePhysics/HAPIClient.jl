@@ -12,5 +12,5 @@ using DimensionalData
     hapi_parameters = hapi(server, dataset, parameters, tmin, tmax; format="csv")
     ds = DimStack(hapi_parameters)
     @test length(layers(ds)) == 2
-    @test length(ds) == 10
+    @test size(ds, 1) == 10
 end
