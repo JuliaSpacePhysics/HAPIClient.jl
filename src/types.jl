@@ -18,7 +18,7 @@ colsize(param) = prod(get(param, "size", 1))
 
 Construct a `HAPIVariable` object from CSV.File `data` and `meta` at index `i`.
 """
-function HAPIVariable(data::CSV.File, meta, i::Integer; merge_metadata=true)
+function HAPIVariable(data::CSV.File, meta, i::Integer; merge_metadata=true, stackcolumns=true)
     time = Tables.getcolumn(data, 1)
     params = meta["parameters"]
     param = params[i+1]
@@ -27,6 +27,10 @@ function HAPIVariable(data::CSV.File, meta, i::Integer; merge_metadata=true)
 
     values = if size == 1
         Tables.getcolumn(data, coloffset)
+    elseif stackcolumns
+        stack(coloffset:coloffset+size-1) do i
+            Tables.getcolumn(data, i)
+        end
     else
         cols = coloffset:(coloffset+size-1)
         map(row -> getindex.(Ref(row), cols), data)
