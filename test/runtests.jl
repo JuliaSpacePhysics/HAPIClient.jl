@@ -4,8 +4,9 @@ using TestItems, TestItemRunner
 
 @run_package_tests
 
-@testset "Aqua" begin
-    include("Aqua.jl")
+@testitem "Aqua" begin
+    using Aqua
+    Aqua.test_all(HAPIClient)
 end
 
 @testitem "DateTime" begin
@@ -42,12 +43,4 @@ end
     for dt in dts
         @test_throws ArgumentError HAPIDateTime(dt)
     end
-end
-
-@testset "Metadata" begin
-    include("metadata.jl")
-end
-
-@testset "DimensionalDataExt" begin
-    include("ext/DimensionalDataExt.jl")
 end

@@ -1,4 +1,4 @@
-@testset "Dataset parameters" begin
+@testitem "Dataset parameters" begin
     server = "https://cdaweb.gsfc.nasa.gov/hapi"
     dataset = "AC_H0_MFI"
 
@@ -8,7 +8,7 @@
 end
 
 
-@testset "Parameters" begin
+@testitem "Parameters" begin
     server = "https://cdaweb.gsfc.nasa.gov/hapi"
     dataset = "AC_H0_MFI"
     parameters = "Magnitude,BGSEc"

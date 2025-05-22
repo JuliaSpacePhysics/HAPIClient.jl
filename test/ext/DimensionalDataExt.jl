@@ -1,8 +1,5 @@
-using HAPIClient
-using Test
-using DimensionalData
-
-@testset "DimensionalDataExt" begin
+@testitem "DimensionalDataExt" begin
+    using DimensionalData
     server = "http://hapi-server.org/servers/TestData2.0/hapi"
     dataset = "dataset1"
     parameters = "scalar,vector"
