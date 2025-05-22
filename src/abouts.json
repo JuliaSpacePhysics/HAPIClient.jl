@@ -1,0 +1,374 @@
+[
+  {
+    "x_url": "https://amda.irap.omp.eu/service/hapi",
+    "id": "AMDA",
+    "title": "AMDA",
+    "contact": "Vincent Génot",
+    "contactID": "amda@irap.omp.eu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "ace_r",
+        "start": "2024-01-31T00:00:00Z",
+        "stop": "2024-02-01T00:00:00Z",
+        "parameters": "ace_r"
+      }
+    },
+    "x_LastUpdateAttempt": "2025-05-21T02:52:50Z",
+    "x_LastUpdateError": "<class 'json.decoder.JSONDecodeError'> Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "x_url": "https://cdaweb.gsfc.nasa.gov/hapi",
+    "id": "CDAWeb",
+    "title": "CDAWeb",
+    "contact": "Robert Candey",
+    "contactID": "NASA-SPDF-Support@nasa.onmicrosoft.com",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "AC_H0_MFI",
+        "start": "1997-09-03T00:00:12Z",
+        "stop": "1997-09-03T00:01:12.000Z",
+        "parameters": "BGSEc"
+      }
+    },
+    "x_LastUpdateAttempt": "2025-05-21T02:52:50Z",
+    "x_LastUpdateError": "<class 'requests.exceptions.HTTPError'> 400 Client Error: 400 for url: https://cdaweb.gsfc.nasa.gov/hapi/about"
+  },
+  {
+    "x_url": "https://csatools.esac.esa.int/HapiServer/hapi",
+    "id": "CSA",
+    "title": "Cluster Science Archive",
+    "contact": "https://www.cosmos.esa.int/web/csa/cluster-helpdesk",
+    "contactID": "esdc_cluster_logs@cosmos.esa.int",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "C4_PP_FGM",
+        "start": "2020-02-24T11:00Z",
+        "stop": "2020-02-24T12:00Z",
+        "parameters": "B_xyz_gse"
+      }
+    },
+    "x_LastUpdate": "2025-05-21T02:52:51Z",
+    "x_LastUpdateChange": "2025-05-20T13:24:59Z",
+    "HAPI": "3.2",
+    "description": "This HAPI server is based on responses provided by the TAP server at https://csa.esac.esa.int/csa-sl-tap/",
+    "x_hapi_home": "/tmp/hapi-server/",
+    "x_buildTime": "2024-03-12T07:42:00",
+    "status": {
+      "code": 1200,
+      "message": "OK request successful"
+    }
+  },
+  {
+    "x_url": "https://iswa.gsfc.nasa.gov/IswaSystemWebApp/hapi",
+    "id": "CCMC_ISWA",
+    "title": "CCMC ISWA",
+    "contact": "Rick Mullinix",
+    "contactID": "richard.e.mullinix@nasa.gov",
+    "x_LastUpdateAttempt": "2025-05-21T02:52:51Z",
+    "x_LastUpdateError": "<class 'requests.exceptions.HTTPError'> 404 Client Error: Not Found for url: https://iswa.gsfc.nasa.gov/IswaSystemWebApp/hapi/about"
+  },
+  {
+    "x_url": "http://lasp.colorado.edu/lisird/hapi",
+    "id": "LISIRD",
+    "title": "LISIRD",
+    "contact": "Doug Lindholm",
+    "contactID": "Doug.Lindholm@lasp.colorado.edu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "composite_mg_index",
+        "start": "2013-07-10Z",
+        "stop": "2013-07-18Z",
+        "parameters": "mg_index"
+      }
+    },
+    "x_LastUpdateAttempt": "2025-05-21T02:52:51Z",
+    "x_LastUpdateError": "<class 'requests.exceptions.HTTPError'> 404 Client Error: Not Found for url: https://lasp.colorado.edu/lisird/hapi/about"
+  },
+  {
+    "x_url": "https://imag-data.bgs.ac.uk/GIN_V1/hapi",
+    "id": "INTERMAGNET",
+    "title": "INTERMAGNET HAPI server",
+    "contact": "e_ginman@bgs.ac.uk",
+    "contactID": "e_ginman@bgs.ac.uk",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "aae/definitive/PT1M/native",
+        "start": "2013-12-31Z",
+        "stop": "2014-01-01Z",
+        "parameters": "Field_Magnitude"
+      }
+    },
+    "x_LastUpdate": "2025-05-21T02:52:52Z",
+    "x_LastUpdateChange": "2025-05-20T13:25:00Z",
+    "HAPI": "3.1",
+    "description": "For more information see intermagnet.org",
+    "citation": "https://intermagnet.org/data_conditions.html",
+    "x_warnings": [
+      "Data providers may embargo data. For details see https://imag-data.bgs.ac.uk/GIN_V1/GINForms2?request=ShowObservatoryDetails"
+    ],
+    "status": {
+      "code": 1200,
+      "message": "ok"
+    }
+  },
+  {
+    "x_url": "https://api.helioviewer.org/hapi/Helioviewer/hapi",
+    "id": "Helioviewer",
+    "title": "Helioviewer",
+    "contact": "Daniel Garcia Briseno",
+    "contactID": "daniel.garciabriseno@nasa.gov",
+    "x_LastUpdateAttempt": "2025-05-21T02:52:52Z",
+    "x_LastUpdateError": "<class 'requests.exceptions.HTTPError'> 404 Client Error: Not Found for url: https://api.helioviewer.org/hapi/Helioviewer/hapi/about"
+  },
+  {
+    "x_url": "http://hapi-server.org/servers/SSCWeb/hapi",
+    "id": "SSCWeb",
+    "title": "SSCWeb",
+    "contact": "Bob Weigel",
+    "contactID": "rweigel@gmu.edu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "active",
+        "start": "1989-09-29T00:00:00.000Z",
+        "stop": "1991-09-30T00:00:00.000Z",
+        "parameters": "X_GSE,Y_GSE,Z_GSE"
+      }
+    },
+    "x_LastUpdateAttempt": "2025-05-21T02:52:52Z",
+    "x_LastUpdateError": "<class 'requests.exceptions.HTTPError'> 404 Client Error: Not Found for url: http://hapi-server.org/servers/SSCWeb/hapi/about"
+  },
+  {
+    "x_url": "https://vires.services/hapi",
+    "id": "VirES-for-Swarm",
+    "title": "VirES for Swarm",
+    "contact": "feedback@vires.services",
+    "contactID": "feedback@vires.services",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "GRACE_A_MAG",
+        "start": "2017-10-31Z",
+        "stop": "2017-11-01Z",
+        "parameters": "F"
+      }
+    },
+    "x_LastUpdate": "2025-05-21T02:52:52Z",
+    "x_LastUpdateChange": "2025-05-20T13:25:01Z",
+    "HAPI": "3.0",
+    "description": "Web API for the ESA Swarm mission products.",
+    "status": {
+      "code": 1200,
+      "message": "OK"
+    }
+  },
+  {
+    "x_url": "https://hapi.spaceweather.knmi.nl/hapi",
+    "id": "KNMI",
+    "title": "KNMI public HAPI server for use with the space weather timeline viewer",
+    "contact": "Eelco Doornbos",
+    "contactID": "eelco.doornbos@knmi.nl",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "champ_thermosphere_density",
+        "start": "2000-07-31T00:00:00.000000Z",
+        "stop": "2000-08-02T00:00:00.000Z",
+        "parameters": "density"
+      }
+    },
+    "x_LastUpdate": "2025-05-21T02:52:53Z",
+    "x_LastUpdateChange": "2025-05-20T13:25:01Z",
+    "description": "Data on this server has been obtained from a variety of sources, and reproduced based on open licenses and/or with express permission of the data owners. It is intended for quick-look visualization with the space weather timeline viewer only. For further analysis, users are advised to retrieve copies of the data from the data owner's repositories.",
+    "citation": "",
+    "HAPI": "3.1",
+    "status": {
+      "code": 1200,
+      "message": "HAPI 1200: OK"
+    }
+  },
+  {
+    "x_url": "https://wdcapi.bgs.ac.uk/hapi",
+    "id": "WDC",
+    "title": "HAPI WDC (Edinburgh) Server",
+    "contact": "wdcgeomag@bgs.ac.uk",
+    "contactID": "Adam.Emsley@bgs.ac.uk",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "aaa/PT1M/xyz",
+        "start": "2005-01-01T00:00:00Z",
+        "stop": "2005-01-03T00:00:00.000Z",
+        "parameters": "Field_Vector"
+      }
+    },
+    "x_LastUpdate": "2025-05-21T02:52:54Z",
+    "x_LastUpdateChange": "2025-05-20T13:25:02Z",
+    "HAPI": "3.2",
+    "description": "Web API for the WDC at Edinburgh datasets. Data is offered at cadences of: minute, hour, day, month and year. K-index data is also available. Data are delivered on a best-quality basis, and converted on-the-fly to the requested orientation and file format. All data are definitive.",
+    "status": {
+      "code": 1200,
+      "message": "OK"
+    }
+  },
+  {
+    "x_url": "https://planet.physics.uiowa.edu/das/das2Server/hapi",
+    "id": "DAS2",
+    "title": "DAS2",
+    "contact": "Jeremy Faden",
+    "contactID": "jeremy-faden@uiowa.edu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "Cassini/MAG/Magnitude",
+        "start": "2016-12-11T13:00:00Z",
+        "stop": "2016-12-11T23:00Z",
+        "parameters": "B_mag"
+      }
+    },
+    "x_LastUpdateAttempt": "2025-05-21T02:52:54Z",
+    "x_LastUpdateError": "<class 'json.decoder.JSONDecodeError'> Expecting value: line 1 column 1 (char 0)"
+  },
+  {
+    "x_url": "http://hapi-server.org/servers/TestData2.0/hapi",
+    "id": "TestData2.0",
+    "title": "HAPI 2.0 Test Data",
+    "description": "Server for testing clients on HAPI 2.0 features",
+    "contact": "Bob Weigel",
+    "contactID": "rweigel@gmu.edu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "dataset1",
+        "start": "1970-01-01T00:00:00Z",
+        "stop": "1970-01-01T00:00:40Z",
+        "parameters": "scalar"
+      }
+    },
+    "x_LastUpdateAttempt": "2025-05-21T02:52:54Z",
+    "x_LastUpdateError": "<class 'requests.exceptions.HTTPError'> 404 Client Error: Not Found for url: http://hapi-server.org/servers/TestData2.0/hapi/about"
+  },
+  {
+    "x_url": "http://hapi-server.org/servers/TestData2.1/hapi",
+    "id": "TestData2.1",
+    "title": "HAPI 2.1 Test Data",
+    "description": "Server for testing clients with HAPI 2.1 additions",
+    "contact": "Bob Weigel",
+    "contactID": "rweigel@gmu.edu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "dataset1",
+        "start": "1970-01-01T00:00:00Z",
+        "stop": "1970-01-01T00:00:40Z",
+        "parameters": "vectorstring"
+      }
+    },
+    "x_LastUpdateAttempt": "2025-05-21T02:52:54Z",
+    "x_LastUpdateError": "<class 'requests.exceptions.HTTPError'> 404 Client Error: Not Found for url: http://hapi-server.org/servers/TestData2.1/hapi/about"
+  },
+  {
+    "x_url": "http://hapi-server.org/servers/TestData3.0/hapi",
+    "id": "TestData3.0",
+    "title": "Server using HAPI 3.0 additions",
+    "description": "Server for testing clients with HAPI 3.0 additions",
+    "contact": "rweigel@gmu.edu",
+    "contactID": "rweigel@gmu.edu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "spectra_time_dependent_bins",
+        "start": "1970-01-01T00:00:00Z",
+        "stop": "1970-01-01T00:00:40Z",
+        "parameters": "scalar"
+      }
+    },
+    "x_LastUpdate": "2025-05-21T02:52:54Z",
+    "x_LastUpdateChange": "2025-05-20T13:25:02Z",
+    "HAPI": "3.0",
+    "status": {
+      "code": 1200,
+      "message": "OK"
+    }
+  },
+  {
+    "x_url": "http://hapi-server.org/servers/TestData3.1/hapi",
+    "id": "TestData3.1",
+    "title": "Server using HAPI 3.1 additions",
+    "description": "Server for testing clients with HAPI 3.1 additions",
+    "contact": "rweigel@gmu.edu",
+    "contactID": "rweigel@gmu.edu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "unicodevector (Z;α;☃;👍)",
+        "start": "1970-01-01T00:00:00Z",
+        "stop": "1970-01-01T00:00:40Z",
+        "parameters": "scalar"
+      }
+    },
+    "x_LastUpdate": "2025-05-21T02:52:54Z",
+    "x_LastUpdateChange": "2025-05-20T13:25:02Z",
+    "HAPI": "3.1",
+    "status": {
+      "code": 1200,
+      "message": "OK"
+    }
+  },
+  {
+    "x_url": "http://hapi-server.org/servers/TestData3.2/hapi",
+    "id": "TestData3.2",
+    "title": "Server using HAPI 3.2 additions",
+    "description": "Server for testing clients with HAPI 3.2 additions",
+    "contact": "rweigel@gmu.edu",
+    "contactID": "rweigel@gmu.edu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "DE1/PWI/B_H",
+        "start": "1981-09-16T02:19Z",
+        "stop": "1981-09-17T19:24Z",
+        "parameters": "scalar"
+      }
+    },
+    "x_LastUpdate": "2025-05-21T02:52:54Z",
+    "x_LastUpdateChange": "2025-05-20T13:25:02Z",
+    "HAPI": "3.2",
+    "status": {
+      "code": 1200,
+      "message": "OK"
+    }
+  },
+  {
+    "x_url": "http://hapi-server.org/servers/TestData3.3/hapi",
+    "id": "TestData3.3",
+    "title": "Server using HAPI 3.3 additions",
+    "description": "Server for testing clients with HAPI 3.3 additions",
+    "contact": "rweigel@gmu.edu",
+    "contactID": "rweigel@gmu.edu",
+    "dataTest": {
+      "name": "Ping Test",
+      "query": {
+        "dataset": "DE1/PWI/B_H",
+        "start": "1970-01-01T00:00:00Z",
+        "stop": "1970-01-01T00:00:20Z",
+        "parameters": "vector"
+      }
+    },
+    "x_LastUpdate": "2025-05-21T02:52:54Z",
+    "x_LastUpdateChange": "2025-05-20T13:36:47Z",
+    "serverCitation": "DOI",
+    "note": ["note 1", "note 2"],
+    "warning": ["warning 1", "warning 2"],
+    "HAPI": "3.3",
+    "status": {
+      "code": 1200,
+      "message": "OK"
+    }
+  }
+]

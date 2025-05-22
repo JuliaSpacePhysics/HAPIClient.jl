@@ -1,6 +1,6 @@
 import Base: /
 
-const DEFAULT_SERVERS_JSON_URL = "https://raw.githubusercontent.com/hapi-server/servers/refs/heads/master/servers.json"
+const DEFAULT_SERVERS_JSON_URL = "https://raw.githubusercontent.com/hapi-server/servers/refs/heads/master/abouts.json"
 const DEFAULT_FORMAT = "csv"
 
 abstract type AbstractServer end
@@ -47,14 +47,19 @@ end
 Load HAPI servers from a JSON file at the specified URL.
 """
 function load_servers_from_json(; url=DEFAULT_SERVERS_JSON_URL, register=false)
-    # Fetch the JSON data
-    response = HTTP.get(url)
-    servers_data = JSON.parse(String(response.body))
+    # Fetch the JSON data: try to load from URL first, fall back to file if HTTP fails
+    servers_data = try
+        response = HTTP.get(url)
+        JSON.parse(String(response.body))
+    catch
+        @warn "HTTP request failed, falling back to local file"
+        JSON.parsefile(joinpath(@__DIR__, "abouts.json"))
+    end
 
     # Register each server
-    servers = map(servers_data["servers"]) do server_info
+    servers = map(servers_data) do server_info
         Server(
-            url=server_info["url"],
+            url=server_info["x_url"],
             id=server_info["id"],
             title=server_info["title"],
             HAPI=get(server_info, "HAPI", nothing),
