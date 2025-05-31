@@ -60,8 +60,8 @@ function load_servers_from_json(; url=DEFAULT_SERVERS_JSON_URL, register=false)
     servers = map(servers_data) do server_info
         Server(
             url=server_info["x_url"],
-            id=server_info["id"],
-            title=server_info["title"],
+            id=get(server_info, "id", ""),
+            title=get(server_info, "title", ""),
             HAPI=get(server_info, "HAPI", nothing),
             format=get(server_info, "format", DEFAULT_FORMAT)
         )
