@@ -18,7 +18,6 @@ include("metadata.jl")
 include("data.jl")
 include("specs/time.jl")
 include("specs/parameter.jl")
-include("utils.jl")
 include("types.jl")
 
 hapi() = get_servers()
