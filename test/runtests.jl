@@ -1,5 +1,3 @@
-using HAPIClient
-using Test
 using TestItems, TestItemRunner
 
 @run_package_tests
