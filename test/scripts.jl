@@ -1,5 +1,5 @@
 # Report software bugs/issues/feature requests at
-# https://github.com/Beforerr/HAPIClient.jl/issues
+# https://github.com/JuliaSpacePhysics/HAPIClient.jl/issues
 # Report data server issues to CONTACT
 
 ## Set-up

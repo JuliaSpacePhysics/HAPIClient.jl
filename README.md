@@ -1,9 +1,9 @@
 # HAPIClient
 
-[![Build Status](https://github.com/Beforerr/HAPIClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/Beforerr/HAPIClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Build Status](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![DOI](https://zenodo.org/badge/935193759.svg)](https://doi.org/10.5281/zenodo.15108960)
 [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
-[![Coverage](https://codecov.io/gh/Beforerr/HAPIClient.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/Beforerr/HAPIClient.jl)
+[![Coverage](https://codecov.io/gh/JuliaSpacePhysics/HAPIClient.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/JuliaSpacePhysics/HAPIClient.jl)
 
 A Julia client for the Heliophysics Application Programmer's Interface (HAPI).
 
