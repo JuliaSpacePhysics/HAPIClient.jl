@@ -1,4 +1,11 @@
 # Reference: https://github.com/hapi-server/client-matlab/blob/master/hapi_test.m
+
+@testitem "get_data" begin
+    for fmt in ["csv", "json"]
+        data = get_data("CDAWeb/AC_H0_MFI/Magnitude,BGSEc", ["2001-01-01T05", "2001-01-01T06"]; format = fmt)
+        @test length(data) == 2
+    end
+end
 @testitem "TestData2.0" begin
     server = "http://hapi-server.org/servers/TestData2.0/hapi"
     dataset = "dataset1"

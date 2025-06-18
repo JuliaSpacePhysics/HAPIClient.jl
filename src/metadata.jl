@@ -5,11 +5,24 @@ const DEFAULT_SERVER_LIST = "https://github.com/hapi-server/servers/raw/master/a
 
 Get a list of available HAPI server URLs from $DEFAULT_SERVER_LIST
 """
-function get_servers(server_list::String=DEFAULT_SERVER_LIST)
+function get_servers(server_list::String = DEFAULT_SERVER_LIST)
     response = HTTP.get(server_list)
-    servers = split(String(response.body), '\n', keepempty=false)
+    servers = split(String(response.body), '\n', keepempty = false)
     return strip.(servers)
 end
+
+# HAPI servers must categorize the response status using at least three status codes: 1200 - OK, 1400 - Bad Request, and 1500 - Internal Server Error.
+function check_status_code(i)
+    if 1200 <= i < 1400
+        return true
+    elseif 1400 <= i < 1500
+        error("Bad request - user input error")
+    elseif i >= 1500
+        error("Internal server error")
+    end
+end
+
+check_status_code(response::Dict) = check_status_code(response["status"]["code"])
 
 """
     get_catalog(server)
@@ -20,7 +33,10 @@ HAPI info response JSON structure: https://github.com/hapi-server/data-specifica
 """
 function get_catalog(server)
     response = HTTP.get(url(server, "catalog"))
-    return JSON.parse(String(response.body))
+    response_dict = JSON.parse(String(response.body))
+    if check_status_code(response_dict)
+        return response_dict["catalog"]
+    end
 end
 
 """
