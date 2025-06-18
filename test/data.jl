@@ -1,3 +1,4 @@
+# Reference: https://github.com/hapi-server/client-matlab/blob/master/hapi_test.m
 @testitem "TestData2.0" begin
     server = "http://hapi-server.org/servers/TestData2.0/hapi"
     dataset = "dataset1"
@@ -24,6 +25,35 @@ end
     parameters = ""
     start = "1970-01-01"
     stop = "1970-01-01T00:01:11"
+
+    @test_nowarn hapi(server, dataset, parameters, start, stop)
+end
+
+@testitem "TestData3.1" begin
+    server = "http://hapi-server.org/servers/TestData3.1/hapi"
+    dataset = "dataset1"
+    parameters = ""
+    start = "1970-01-01"
+    stop = "1970-01-01T00:01:11"
+    @test_nowarn hapi(server, dataset, parameters, start, stop)
+
+
+    dataset = "dataset1-Aα☃"
+    parameters = ""
+    @test_nowarn hapi(server, dataset, parameters, start, stop)
+
+
+    dataset = "dataset2"
+    parameters = ""
+    @test_nowarn hapi(server, dataset, parameters, start, stop)
+end
+
+@testitem "TestData3.2" begin
+    server = "http://hapi-server.org/servers/TestData3.2/hapi"
+    dataset = "DE1/PWI/B_H"
+    parameters = ""
+    start = "1981-09-16T02:19Z"
+    stop = "1981-09-17T19:24Z"
 
     @test_nowarn hapi(server, dataset, parameters, start, stop)
 end
