@@ -1,4 +1,3 @@
-
 """
     get_data(server, dataset, parameters, tmin, tmax; format="csv")
 
@@ -6,7 +5,7 @@ Get data and metadata from a HAPI `server` for a given `dataset` and `parameters
 
 Supported data formats: "csv", "binary", "json".
 """
-function get_data(server, dataset, parameters, tmin, tmax; format=format(server))
+function get_data(server, dataset, parameters, tmin, tmax; format = format(server))
 
     # Validate time format
     tmin = HAPIDateTime(tmin)
@@ -25,7 +24,7 @@ function get_data(server, dataset, parameters, tmin, tmax; format=format(server)
     response = HTTP.get(uri)
 
     data = if format == "csv"
-        CSV.File(response.body; header=false, dateformat=DEFAULT_DATE_FORMAT)
+        CSV.File(response.body; header = false, dateformat = DEFAULT_DATE_FORMAT)
     elseif format == "json"
         JSON.parse(String(response.body))
     elseif format == "binary"
@@ -35,7 +34,15 @@ function get_data(server, dataset, parameters, tmin, tmax; format=format(server)
     end
     meta = get_parameters(server, dataset, parameters)
     meta["uri"] = uri
-    return HAPIVariables(data, meta)
+    params = meta["parameters"]
+    n = length(params) - 1
+    return n == 1 ? _merge_meta!(HAPIVariable(data, params, 1), meta) : HAPIVariables(data, params, meta)
+end
+
+_merge_meta!(x, meta) = begin
+    merge!(x.meta, meta)
+    delete!(x.meta, "parameters")
+    return x
 end
 
 """

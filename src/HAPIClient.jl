@@ -8,7 +8,8 @@ using Tables
 using Unitful
 using SpaceDataModel: AbstractDataVariable, parse_datetime
 import Unitful: unit
-using SpaceDataModel: name, units, meta, times
+using SpaceDataModel: name, units, meta
+import SpaceDataModel: times
 
 export hapi, get_data, meta, times
 export HAPIVariable, HAPIVariables
@@ -24,6 +25,7 @@ hapi() = get_servers()
 hapi(server) = get_catalog(server)
 hapi(server, dataset) = get_parameters(server, dataset)
 hapi(server, dataset, parameters) = get_parameters(server, dataset, parameters)
+hapi(server, dataset, tmin, tmax; kwargs...) = get_data(server, dataset, "", tmin, tmax; kwargs...)
 hapi(server, dataset, parameters, tmin, tmax; kwargs...) = get_data(server, dataset, parameters, tmin, tmax; kwargs...)
 
 function __init__()

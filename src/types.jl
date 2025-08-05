@@ -1,55 +1,65 @@
-struct HAPIVariable{T,N,A<:AbstractArray{T,N},Tt<:AbstractVector} <: AbstractDataVariable{T,N}
+struct HAPIVariable{T, N, A <: AbstractArray{T, N}, Tt <: AbstractVector} <: AbstractDataVariable{T, N}
     data::A
     time::Tt
     meta::Dict
 end
 
-function HAPIVariables(data, meta)
-    params = meta["parameters"]
+"""
+A thin wrapper over NamedTuple for HAPI variables that shares the same time axis.
+"""
+struct HAPIVariables{NT <: NamedTuple, D <: Dict}
+    nt::NT
+    meta::D
+end
+
+@inline Base.parent(x::HAPIVariables) = getfield(x, :nt)
+times(x::HAPIVariables) = times(first(parent(x)))
+Base.propertynames(x::HAPIVariables) = propertynames(parent(x))
+Base.getproperty(x::HAPIVariables, s::Symbol) = getproperty(parent(x), s)
+Base.length(x::HAPIVariables) = length(parent(x))
+Base.iterate(x::HAPIVariables, args...) = iterate(parent(x), args...)
+Base.getindex(x::HAPIVariables, i) = getindex(parent(x), i)
+
+function HAPIVariables(data, params, meta)
     n = length(params) - 1
-    vars = [HAPIVariable(data, meta, i) for i in 1:n]
-    return n == 1 ? first(vars) : vars
+    names = Tuple(Symbol(params[i + 1]["name"]) for i in 1:n)
+    values = (HAPIVariable(data, params, i) for i in 1:n)
+    return HAPIVariables(NamedTuple{names}(values), meta)
 end
 
 colsize(param) = prod(get(param, "size", 1))
 
 """
-    HAPIVariable(data, meta, i)
+    HAPIVariable(data, params, i)
 
-Construct a `HAPIVariable` object from CSV.File `data` and `meta` at index `i`.
+Construct a `HAPIVariable` object from CSV.File `data` and `params` at index `i`.
 """
-function HAPIVariable(data::CSV.File, meta, i::Integer; merge_metadata=true, stackcolumns=true)
+function HAPIVariable(data::CSV.File, params, i::Integer)
     time = Tables.getcolumn(data, 1)
-    params = meta["parameters"]
-    param = params[i+1]
+    param = params[i + 1]
     size = colsize(param)
     coloffset = mapreduce(colsize, +, @view(params[1:i])) + 1
 
     values = if size == 1
         Tables.getcolumn(data, coloffset)
-    elseif stackcolumns
-        stack(coloffset:coloffset+size-1) do i
+    else
+        stack(coloffset:(coloffset + size - 1)) do i
             Tables.getcolumn(data, i)
         end
-    else
-        cols = coloffset:(coloffset+size-1)
-        map(row -> getindex.(Ref(row), cols), data)
     end
-    final_meta = merge_metadata ? delete!(merge(meta, param), "parameters") : param
-    HAPIVariable(values, time, final_meta)
+    return HAPIVariable(values, time, param)
 end
 
 """
-    HAPIVariable(data, meta, i)
+    HAPIVariable(data, params, i)
 
-Construct a `HAPIVariable` object from a JSON-parsed `data` and `meta` at index `i`.
+Construct a `HAPIVariable` object from a JSON-parsed `data` and `params` at index `i`.
 """
-function HAPIVariable(data, meta, i::Integer; merge_metadata=true)
+function HAPIVariable(data, params, i::Integer)
     time = @. DateTime(getindex(data, 1), DEFAULT_DATE_FORMAT)
-    param = meta["parameters"][i+1]
+    param = params[i + 1]
     values = getindex.(data, i + 1)
-    final_meta = merge_metadata ? delete!(merge(meta, param), "parameters") : param
-    HAPIVariable(values, time, final_meta)
+    return HAPIVariable(values, time, param)
 end
 
 """
@@ -59,10 +69,10 @@ Construct a `HAPIVariable` object from a JSON-parsed Dict `d` (containing parame
 """
 function HAPIVariable(d::Dict, i::Integer)
     data = d["data"]
-    param = d["parameters"][i+1]
+    param = d["parameters"][i + 1]
     time = @. DateTime(getindex(data, 1), DEFAULT_DATE_FORMAT)
     values = getindex.(data, i + 1)
-    HAPIVariable(values, time, param)
+    return HAPIVariable(values, time, param)
 end
 
 HAPIVariable(d::Dict, meta, i::Integer) = HAPIVariable(d, i)
@@ -75,7 +85,7 @@ function hapi_uparse(u)
     isnothing(u) && return 1
     u == "UTC" && return 1
     u == "degrees" && return u"°"
-    uparse(u)
+    return uparse(u)
 end
 hapi_uparse(units::AbstractArray) = hapi_uparse.(units)
 

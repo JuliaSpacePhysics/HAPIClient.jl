@@ -27,6 +27,6 @@ function DimensionalData.DimArray(v::HAPIVariable; add_unit=true)
     DimArray(values, dims(v); name=Symbol(name(v)), metadata)
 end
 
-DimStack(vs::AbstractArray{<:HAPIVariable}) = DimStack(DimArray.(vs)...)
+DimStack(vs::HAPIVariables) = DimStack(DimArray.(vs)...)
 
 end
