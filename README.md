@@ -54,6 +54,18 @@ csa_end = DateTime(2001, 6, 11, 0, 1, 0)
 csa_data = hapi(CSA, csa_dataset, csa_parameters, csa_start, csa_end)
 ```
 
+Recommended way to access variable properties:
+
+```julia
+var = data[1]
+# to retrieve the values
+parent(var)
+# to retrieve the timestamps
+times(var)
+# to retrieve the metadata
+meta(var)
+```
+
 ### Visualization
 
 For visualization, see [SPEDAS.jl quickstart](https://beforerr.github.io/SPEDAS.jl/dev/tutorials/getting-started/).
