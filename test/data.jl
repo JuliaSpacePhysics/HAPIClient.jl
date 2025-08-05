@@ -4,6 +4,8 @@
     for fmt in ["csv", "json"]
         data = get_data("CDAWeb/AC_H0_MFI/Magnitude,BGSEc", ["2001-01-01T05", "2001-01-01T06"]; format = fmt)
         @test length(data) == 2
+        @test length(times(data[1])) == 2
+        @test meta(data[1])["name"] == "Magnitude"
     end
 end
 @testitem "TestData2.0" begin

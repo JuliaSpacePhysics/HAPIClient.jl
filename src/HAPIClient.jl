@@ -8,9 +8,9 @@ using Tables
 using Unitful
 using SpaceDataModel: AbstractDataVariable, parse_datetime
 import Unitful: unit
-using SpaceDataModel: name, units, meta
+using SpaceDataModel: name, units, meta, times
 
-export hapi, get_data
+export hapi, get_data, meta, times
 export HAPIVariable, HAPIVariables
 
 include("server.jl")
