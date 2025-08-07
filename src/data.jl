@@ -51,13 +51,15 @@ end
 Get data and metadata using a `path` in the format "server/dataset/parameter".
 """
 function get_data(path, tmin, tmax; kwargs...)
-    # Split path into components
+    # Split path into components - handle datasets with slashes
     parts = split(path, "/")
-    length(parts) != 3 && throw(ArgumentError("Path must be in format 'server/dataset/parameter'"))
-    server_id, dataset, parameters = parts
-    server = Server(server_id)
+    length(parts) < 3 && throw(ArgumentError("Path must be in format 'server/dataset/parameter'"))
 
-    # Call the main get_data function
+    # First part is server, last part is parameter, everything in between is dataset
+    server = Server(parts[1])
+    parameters = parts[end]
+    dataset = join(parts[2:(end - 1)], "/")
+
     return get_data(server, dataset, parameters, tmin, tmax; kwargs...)
 end
 

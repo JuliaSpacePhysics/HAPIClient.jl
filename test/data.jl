@@ -79,6 +79,17 @@ end
     @test_nowarn hapi(server, dataset, parameters, tmin, tmax)
 end
 
+@testitem "INTERMAGNET" begin
+    server = INTERMAGNET
+    dataset = "aae/definitive/PT1M/xyzf"
+    parameters = "Field_Vector"
+    start = "2001-06-11T00:00:00"
+    stop = "2001-06-11T00:01:00"
+
+    @test_nowarn hapi(server, dataset, parameters, start, stop)
+    @test_nowarn get_data("INTERMAGNET/aae/definitive/PT1M/xyzf/Field_Vector", start, stop)
+end
+
 @testitem "CDAWeb" begin
     server = CDAWeb
     dataset = "AC_H0_MFI"
