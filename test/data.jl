@@ -1,13 +1,18 @@
 # Reference: https://github.com/hapi-server/client-matlab/blob/master/hapi_test.m
 
 @testitem "get_data" begin
+    id = "CDAWeb/AC_H0_MFI/Magnitude,BGSEc"
+    tmin = "2001-01-01T05"
+    tmax =  "2001-01-01T06"
+    data = get_data(id, [tmin, tmax]; verbose=1)
+    @test data.Magnitude == data[1]
+    @test length(data) == 2
+    @test length(times(data)) == 225
+    @test meta(data[1])["name"] == "Magnitude"
+    @test_nowarn display(data)
+
     for fmt in ["csv", "json"]
-        data = get_data("CDAWeb/AC_H0_MFI/Magnitude,BGSEc", ["2001-01-01T05", "2001-01-01T06"]; format = fmt)
-        @test data.Magnitude == data[1]
-        @test length(data) == 2
-        @test length(times(data)) == 225
-        @test meta(data[1])["name"] == "Magnitude"
-        @test_nowarn display(data)
+        @test_nowarn get_data(id, [tmin, tmax]; format = fmt)
     end
 end
 @testitem "TestData2.0" begin
