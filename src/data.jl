@@ -35,8 +35,7 @@ function get_data(server, dataset, parameters, tmin, tmax; format = format(serve
     meta = get_parameters(server, dataset, parameters)
     meta["uri"] = uri
     params = meta["parameters"]
-    n = length(params) - 1
-    return n == 1 ? _merge_meta!(HAPIVariable(data, params, 1), meta) : HAPIVariables(data, params, meta)
+    return HAPIVariables(data, params, meta, server, dataset)
 end
 
 _merge_meta!(x, meta) = begin
