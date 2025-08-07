@@ -1,7 +1,8 @@
 # HAPIClient
 
-[![Build Status](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
+[![Dev](https://img.shields.io/badge/docs-dev-blue.svg)](https://JuliaSpacePhysics.github.io/HAPIClient.jl/dev/)
 [![DOI](https://zenodo.org/badge/935193759.svg)](https://doi.org/10.5281/zenodo.15108960)
+[![Build Status](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
 [![Coverage](https://codecov.io/gh/JuliaSpacePhysics/HAPIClient.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/JuliaSpacePhysics/HAPIClient.jl)
 
@@ -45,13 +46,6 @@ data = get_data("CDAWeb/AC_H0_MFI/Magnitude,BGSEc", start_time, end_time)
 # Access the data
 Magnitude = data[1]
 BGSEc = data[2]
-
-# Example with CSA server
-csa_dataset = "C4_CP_FGM_FULL"
-csa_parameters = "B_vec_xyz_gse,B_mag"
-csa_start = DateTime(2001, 6, 11, 0, 0, 0)
-csa_end = DateTime(2001, 6, 11, 0, 1, 0)
-csa_data = hapi(CSA, csa_dataset, csa_parameters, csa_start, csa_end)
 ```
 
 Recommended way to access variable properties:
@@ -65,7 +59,3 @@ times(var)
 # to retrieve the metadata
 meta(var)
 ```
-
-### Visualization
-
-For visualization, see [SPEDAS.jl quickstart](https://beforerr.github.io/SPEDAS.jl/dev/tutorials/getting-started/).

@@ -21,6 +21,18 @@ include("specs/time.jl")
 include("specs/parameter.jl")
 include("types.jl")
 
+"""
+Main interface to HAPI servers and provides multiple dispatch for different use cases:
+
+- `hapi()` - List available HAPI servers ([`get_servers`](@ref))
+- `hapi(server)` - Get catalog of datasets from a server ([`get_catalog`](@ref))
+- `hapi(server, dataset)` - Get parameter information for a dataset ([`get_parameters`](@ref))
+- `hapi(server, dataset, parameters)` - Get parameter information for specific parameters ([`get_parameters`](@ref))
+- `hapi(server, dataset, tmin, tmax)` - Get all data for a dataset in a time range ([`get_data`](@ref))
+- `hapi(server, dataset, parameters, tmin, tmax)` - Get specific parameter data in a time range ([`get_data`](@ref))
+"""
+function hapi end
+
 hapi() = get_servers()
 hapi(server) = get_catalog(server)
 hapi(server, dataset) = get_parameters(server, dataset)
