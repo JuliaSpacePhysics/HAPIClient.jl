@@ -7,6 +7,7 @@
         @test length(data) == 2
         @test length(times(data)) == 225
         @test meta(data[1])["name"] == "Magnitude"
+        @test_nowarn display(data)
     end
 end
 @testitem "TestData2.0" begin

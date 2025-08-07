@@ -20,6 +20,19 @@ Base.length(x::HAPIVariables) = length(parent(x))
 Base.iterate(x::HAPIVariables, args...) = iterate(parent(x), args...)
 Base.getindex(x::HAPIVariables, i) = getindex(parent(x), i)
 
+Base.show(io::IO, x::HAPIVariables) = show(io, parent(x))
+function Base.show(io::IO, m::MIME"text/plain", var::HAPIVariables)
+    print(io, "HAPIVariables")
+    foreach(var) do v
+        print(io, "\n  ")
+        show(io, v)
+    end
+    if (mt = meta(var)) !== nothing
+        print(io, "\nMetadata - ")
+        show(io, m, mt)
+    end
+end
+
 function HAPIVariables(data, params, meta)
     n = length(params) - 1
     names = Tuple(Symbol(params[i + 1]["name"]) for i in 1:n)
