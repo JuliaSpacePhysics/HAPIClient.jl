@@ -3,9 +3,11 @@
 
 Get data and metadata from a HAPI `server` for a given `dataset` and `parameters` within a time range `[tmin, tmax]`.
 
-Supported data formats: "csv", "binary", "json".
+Supported optional keyword arguments:
+- `format`: Data format, default is "csv" (other options: "binary", "json"). 
+- `verbose`: Verbosity level (passed to `HTTP.get`), default is 0 (other options: 1, 2).
 """
-function get_data(server, dataset, parameters, tmin, tmax; format = format(server))
+function get_data(server, dataset, parameters, tmin, tmax; format = format(server), verbose = 0, kw...)
 
     # Validate time format
     tmin = HAPIDateTime(tmin)
@@ -21,7 +23,8 @@ function get_data(server, dataset, parameters, tmin, tmax; format = format(serve
         "format" => format
     )
     uri = HTTP.request_uri(url, query)
-    response = HTTP.get(uri)
+    verbose > 0 && @info "Getting data from $uri"
+    response = HTTP.get(uri; verbose, kw...)
 
     data = if format == "csv"
         CSV.File(response.body; header = false, dateformat = DEFAULT_DATE_FORMAT)
@@ -36,6 +39,7 @@ function get_data(server, dataset, parameters, tmin, tmax; format = format(serve
     meta["uri"] = uri
     params = meta["parameters"]
     n = length(params) - 1
+    verbose > 0 && @info "Got $n parameters"
     return n == 1 ? _merge_meta!(HAPIVariable(data, params, 1), meta) : HAPIVariables(data, params, meta)
 end
 
