@@ -13,6 +13,7 @@ abstract type AbstractServer end
     format::String = DEFAULT_FORMAT
 end
 
+id(s::Server) = s.id
 url(s) = s
 url(s::Server) = s.url
 url(s, t) = "$(url(s))/$t"

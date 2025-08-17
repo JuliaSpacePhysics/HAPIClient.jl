@@ -17,13 +17,18 @@ end
 """
 A thin wrapper over NamedTuple for HAPI variables that shares the same time axis.
 """
-struct HAPIVariables{NT <: NamedTuple, D <: Dict}
+struct HAPIVariables{NT <: NamedTuple, D <: Dict, S, DS}
     nt::NT
     meta::D
+    server::S
+    dataset::DS
 end
 
 @inline Base.parent(x::HAPIVariables) = getfield(x, :nt)
 times(x::HAPIVariables) = times(first(parent(x)))
+server(x::HAPIVariables) = getfield(x, :server)
+dataset(x::HAPIVariables) = getfield(x, :dataset)
+id(x::HAPIVariables) = id(server(x)) * "/" * dataset(x)
 Base.propertynames(x::HAPIVariables) = propertynames(parent(x))
 Base.getproperty(x::HAPIVariables, s::Symbol) = getproperty(parent(x), s)
 Base.length(x::HAPIVariables) = length(parent(x))
@@ -32,7 +37,8 @@ Base.getindex(x::HAPIVariables, i) = getindex(parent(x), i)
 
 Base.show(io::IO, x::HAPIVariables) = show(io, parent(x))
 function Base.show(io::IO, m::MIME"text/plain", var::HAPIVariables)
-    print(io, "HAPIVariables")
+    print(io, "HAPIVariables: ")
+    printstyled(io, id(var), color=209)
     foreach(var) do v
         print(io, "\n  ")
         show(io, v)
@@ -43,11 +49,11 @@ function Base.show(io::IO, m::MIME"text/plain", var::HAPIVariables)
     end
 end
 
-function HAPIVariables(data, params, meta)
+function HAPIVariables(data, params, meta, args...)
     n = length(params) - 1
     names = Tuple(Symbol(params[i + 1]["name"]) for i in 1:n)
     values = (HAPIVariable(data, params, i) for i in 1:n)
-    return HAPIVariables(NamedTuple{names}(values), meta)
+    return HAPIVariables(NamedTuple{names}(values), meta, args...)
 end
 
 colsize(param) = prod(get(param, "size", 1))
