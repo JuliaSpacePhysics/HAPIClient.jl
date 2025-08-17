@@ -1,3 +1,13 @@
+
+"""
+An array-like object that represents a HAPI variable.
+
+## Fields
+
+- `data`: The underlying data values (use `parent(x)` to access).
+- `time`: The time axis (use `times(x)` to access).
+- `meta`: The metadata (use `meta(x)` to access).
+"""
 struct HAPIVariable{T, N, A <: AbstractArray{T, N}, Tt <: AbstractVector} <: AbstractDataVariable{T, N}
     data::A
     time::Tt

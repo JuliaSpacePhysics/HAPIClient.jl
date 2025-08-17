@@ -8,7 +8,7 @@
 
 A Julia client for the Heliophysics Application Programmer's Interface (HAPI).
 
-See [HAPI Server Browser](https://hapi-server.org/servers/) for a list of HAPI servers and datasets.
+For information on using the package, see the [documentation](https://JuliaSpacePhysics.github.io/HAPIClient.jl/dev/). For the list of HAPI servers and datasets, see [HAPI Server Browser](https://hapi-server.org/servers/).
 
 ## Installation
 
@@ -36,21 +36,20 @@ params = hapi(CDAWeb, dataset)
 
 # Retrieve data for specific parameters within a time range
 parameters = "Magnitude,BGSEc"
-start_time = DateTime(2001, 1, 1, 5, 0, 0)
-end_time = DateTime(2001, 1, 1, 6, 0, 0)
-data = hapi(CDAWeb, dataset, parameters, start_time, end_time)
+tmin = DateTime(2001, 1, 1, 5, 0, 0)
+tmax = DateTime(2001, 1, 1, 6, 0, 0)
+data = hapi(CDAWeb, dataset, parameters, tmin, tmax)
 
 # Alternative method using path format
-data = get_data("CDAWeb/AC_H0_MFI/Magnitude,BGSEc", start_time, end_time)
-
-# Access the data
-Magnitude = data[1]
-BGSEc = data[2]
+data = get_data("CDAWeb/AC_H0_MFI/Magnitude,BGSEc", tmin, tmax)
 ```
 
-Recommended way to access variable properties:
+Recommended way to access the data and variable properties:
 
 ```julia
+Magnitude = data[1]
+BGSEc = data[2]
+
 var = data[1]
 # to retrieve the values
 parent(var)

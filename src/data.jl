@@ -3,9 +3,11 @@
 
 Get data and metadata from a HAPI `server` for a given `dataset` and `parameters` within a time range `[tmin, tmax]`.
 
-Supported data formats: "csv", "binary", "json".
+Supported optional keyword arguments:
+- `format`: Data format, default is "csv" (other options: "binary", "json"). 
+- `verbose`: Verbosity level (passed to `HTTP.get`), default is 0 (other options: 1, 2).
 """
-function get_data(server, dataset, parameters, tmin, tmax; format = format(server))
+function get_data(server, dataset, parameters, tmin, tmax; format = format(server), verbose = 0, kw...)
 
     # Validate time format
     tmin = HAPIDateTime(tmin)
@@ -21,7 +23,8 @@ function get_data(server, dataset, parameters, tmin, tmax; format = format(serve
         "format" => format
     )
     uri = HTTP.request_uri(url, query)
-    response = HTTP.get(uri)
+    verbose > 0 && @info "Getting data from $uri"
+    response = HTTP.get(uri; verbose, kw...)
 
     data = if format == "csv"
         CSV.File(response.body; header = false, dateformat = DEFAULT_DATE_FORMAT)
@@ -35,6 +38,8 @@ function get_data(server, dataset, parameters, tmin, tmax; format = format(serve
     meta = get_parameters(server, dataset, parameters)
     meta["uri"] = uri
     params = meta["parameters"]
+    n = length(params) - 1
+    verbose > 0 && @info "Got $n parameters"
     return HAPIVariables(data, params, meta, server, dataset)
 end
 
@@ -50,13 +55,15 @@ end
 Get data and metadata using a `path` in the format "server/dataset/parameter".
 """
 function get_data(path, tmin, tmax; kwargs...)
-    # Split path into components
+    # Split path into components - handle datasets with slashes
     parts = split(path, "/")
-    length(parts) != 3 && throw(ArgumentError("Path must be in format 'server/dataset/parameter'"))
-    server_id, dataset, parameters = parts
-    server = Server(server_id)
+    length(parts) < 3 && throw(ArgumentError("Path must be in format 'server/dataset/parameter'"))
 
-    # Call the main get_data function
+    # First part is server, last part is parameter, everything in between is dataset
+    server = Server(parts[1])
+    parameters = parts[end]
+    dataset = join(parts[2:(end - 1)], "/")
+
     return get_data(server, dataset, parameters, tmin, tmax; kwargs...)
 end
 

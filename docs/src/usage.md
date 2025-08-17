@@ -44,21 +44,23 @@ using Dates
 
 dataset = "AC_H0_MFI"
 parameters = "Magnitude,BGSEc"
-start_time = DateTime(2001, 1, 1, 5, 0, 0)
-end_time = DateTime(2001, 1, 1, 6, 0, 0)
+tmin = DateTime(2001, 1, 1, 5, 0, 0)
+tmax = DateTime(2001, 1, 1, 6, 0, 0)
 
 # Retrieve the data
-data = hapi(CDAWeb, dataset, parameters, start_time, end_time)
+data = hapi(CDAWeb, dataset, parameters, tmin, tmax)
 ```
 
 ### Alternative Path Format
 
-You can also use a path-like format for data retrieval:
+You can also use a path-like format for data retrieval. The path format is `"server/dataset/parameter"`, where datasets may contain slashes:
 
 ```julia
-# Alternative method using path format
-data = get_data("CDAWeb/AC_H0_MFI/Magnitude,BGSEc", start_time, end_time)
+data = get_data("CDAWeb/AC_H0_MFI/Magnitude,BGSEc", tmin, tmax)
 ```
+
+!!! note
+    This path format cannot handle cases where both the dataset and parameter contain slashes (e.g., dataset=`abc/123` and parameter=`p1/v1`). In such cases, use the `hapi()` function directly.
 
 ### Accessing Retrieved Data
 
@@ -94,11 +96,23 @@ metadata = meta(var)
 
 ```julia
 # Example with CSA (Cluster Science Archive) server
-csa_dataset = "C4_CP_FGM_FULL"
-csa_parameters = "B_vec_xyz_gse,B_mag"
-csa_start = DateTime(2001, 6, 11, 0, 0, 0)
-csa_end = DateTime(2001, 6, 11, 0, 1, 0)
-csa_data = hapi(CSA, csa_dataset, csa_parameters, csa_start, csa_end)
+dataset = "C4_CP_FGM_FULL"
+parameters = "B_vec_xyz_gse,B_mag"
+tmin = DateTime(2001, 6, 11, 0, 0, 0)
+tmax = DateTime(2001, 6, 11, 0, 1, 0)
+data = hapi(CSA, dataset, parameters, tmin, tmax)
+```
+
+### INTERMAGNET Example
+
+```julia
+# Example with INTERMAGNET server (datasets with slashes in names)
+dataset = "aae/definitive/PT1M/xyzf"
+parameters = "Field_Vector"
+tmin = DateTime(2001, 6, 11, 0, 0, 0)
+tmax = DateTime(2001, 6, 11, 0, 1, 0)
+data = hapi(INTERMAGNET, dataset, parameters, tmin, tmax)
+data = get_data("INTERMAGNET/aae/definitive/PT1M/xyzf/Field_Vector", tmin, tmax)
 ```
 
 ## Data Analysis
