@@ -22,7 +22,8 @@ end
     tmin = "1970-01-01T00:00:00"
     tmax = "1970-01-01T00:00:10"
 
-    @test_nowarn hapi(server, dataset, parameters, tmin, tmax)
+    vars = hapi(server, dataset, parameters, tmin, tmax)
+    display(vars)
 end
 
 @testitem "TestData2.1" begin

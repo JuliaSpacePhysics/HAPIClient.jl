@@ -1,9 +1,10 @@
 module HAPIClient
 
 using HTTP
-using JSON
+using HTTP: request_uri, URI
+import JSON
 using Dates
-using CSV
+import CSV
 using Tables
 using Unitful
 using SpaceDataModel: AbstractDataVariable, parse_datetime
@@ -13,6 +14,8 @@ import SpaceDataModel: times
 
 export hapi, get_data, meta, times
 export HAPIVariable, HAPIVariables
+
+json_parse(x) = JSON.parse(String(x))
 
 include("server.jl")
 include("metadata.jl")

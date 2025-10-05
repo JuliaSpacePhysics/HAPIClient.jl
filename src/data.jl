@@ -22,31 +22,23 @@ function get_data(server, dataset, parameters, tmin, tmax; format = format(serve
         "time.max" => tmax,
         "format" => format
     )
-    uri = HTTP.request_uri(url, query)
+    uri = request_uri(url, query)
     verbose > 0 && @info "Getting data from $uri"
     response = HTTP.get(uri; verbose, kw...)
 
     data = if format == "csv"
         CSV.File(response.body; header = false, dateformat = DEFAULT_DATE_FORMAT)
     elseif format == "json"
-        JSON.parse(String(response.body))
+        json_parse(response.body)
     elseif format == "binary"
         error("Binary format not yet implemented")
     else
         throw("Unsupported format: $format")
     end
     meta = get_parameters(server, dataset, parameters)
-    meta["uri"] = uri
     params = meta["parameters"]
-    n = length(params) - 1
-    verbose > 0 && @info "Got $n parameters"
-    return HAPIVariables(data, params, meta, server, dataset)
-end
-
-_merge_meta!(x, meta) = begin
-    merge!(x.meta, meta)
-    delete!(x.meta, "parameters")
-    return x
+    verbose > 0 && @info "Got $(length(params) - 1) parameters"
+    return HAPIVariables(data, params, meta, server, dataset, uri)
 end
 
 """

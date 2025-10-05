@@ -39,7 +39,7 @@ struct Parameter
     vectorComponents::Union{String,Vector{String},Nothing}
     bins::Union{Vector{Dict{String,Any}},Nothing}
 
-    function Parameter(dict::Dict{String,Any})
+    function Parameter(dict::AbstractDict)
         # Validate required fields
         name = get(dict, "name") do
             throw(ArgumentError("Parameter missing required field 'name'"))
@@ -101,7 +101,7 @@ struct Parameter
 end
 
 # Constructor from JSON-like dictionary
-Base.convert(::Type{Parameter}, dict::Dict{String,Any}) = Parameter(dict)
+Base.convert(::Type{Parameter}, dict::AbstractDict{String,Any}) = Parameter(dict)
 
 """
     is_time_parameter(param::Parameter)
