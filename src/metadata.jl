@@ -22,7 +22,7 @@ function check_status_code(i)
     end
 end
 
-check_status_code(response::Dict) = check_status_code(response["status"]["code"])
+check_status_code(response::AbstractDict) = check_status_code(response["status"]["code"])
 
 """
     get_catalog(server)
@@ -33,34 +33,33 @@ HAPI info response JSON structure: https://github.com/hapi-server/data-specifica
 """
 function get_catalog(server)
     response = HTTP.get(url(server, "catalog"))
-    response_dict = JSON.parse(String(response.body))
+    response_dict = json_parse(response.body)
     if check_status_code(response_dict)
         return response_dict["catalog"]
     end
 end
 
 """
-    get_parameters(server, dataset)
+    get_parameters(server, id)
 
-Get a dictionary containing the HAPI info metadata for all parameters in the `dataset`.
+Get a dictionary containing the HAPI info metadata for all parameters in the `id` dataset.
 Returns a tuple of (info, parameters) where info is the full response and parameters is
 a Vector of Parameter objects.
 
 HAPI info response JSON structure: https://github.com/hapi-server/data-specification/blob/master/hapi-dev/HAPI-data-access-spec-dev.md#36-info
 """
-function get_parameters(server, dataset)
-    query = Dict("id" => dataset)
-    response = HTTP.get(url(server, "info"); query)
-    return JSON.parse(String(response.body))
+function get_parameters(server, id)
+    response = HTTP.get(url(server, "info"); query = (; id))
+    return json_parse(response.body)
 end
 
 """
-    get_parameters(server, dataset, parameters)
+    get_parameters(server, id, parameters)
 
 Get a dictionary containing the HAPI info metadata for each parameter in the comma-separated string `parameters`.
 """
-function get_parameters(server, dataset, parameters)
-    query = Dict("id" => dataset, "parameters" => parameters)
+function get_parameters(server, id, parameters)
+    query = (; id, parameters)
     response = HTTP.get(url(server, "info"); query)
-    return JSON.parse(String(response.body))
+    return json_parse(response.body)
 end

@@ -39,7 +39,7 @@ Get server capabilities.
 """
 function get_capabilities(server)
     response = HTTP.get(url(server, "capabilities"))
-    return JSON.parse(String(response.body))
+    return json_parse(response.body)
 end
 
 """
@@ -51,7 +51,7 @@ function load_servers_from_json(; url=DEFAULT_SERVERS_JSON_URL, register=false)
     # Fetch the JSON data: try to load from URL first, fall back to file if HTTP fails
     servers_data = try
         response = HTTP.get(url)
-        JSON.parse(String(response.body))
+        json_parse(response.body)
     catch
         @warn "HTTP request failed, falling back to local file"
         JSON.parsefile(joinpath(@__DIR__, "abouts.json"))
