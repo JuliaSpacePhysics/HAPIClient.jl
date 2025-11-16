@@ -114,7 +114,6 @@ end
 
 HAPIVariable(d::AbstractDict, meta, i::Integer) = HAPIVariable(d, i)
 
-columns(var::HAPIVariable) = meta(var)["columns"]
 colsize(var::HAPIVariable) = colsize(meta(var))
 
 # when units have more than one value, return an array

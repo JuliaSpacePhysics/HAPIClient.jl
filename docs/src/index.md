@@ -1,7 +1,8 @@
 # HAPIClient.jl
 
-[![Build Status](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![DOI](https://zenodo.org/badge/935193759.svg)](https://doi.org/10.5281/zenodo.15108960)
+
+[![Build Status](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
 [![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
 [![Coverage](https://codecov.io/gh/JuliaSpacePhysics/HAPIClient.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/JuliaSpacePhysics/HAPIClient.jl)
 
@@ -13,7 +14,7 @@ HAPIClient.jl makes it easy to access heliophysics data from HAPI-compliant serv
 - Browsing catalogs of datasets
 - Retrieving parameter information
 - Downloading time series data
-- Integration with Julia's ecosystem (Dates, Tables, Unitful)
+- Integration with Julia's ecosystem (Unitful, [DimensionalData](https://github.com/rafaqz/DimensionalData.jl))
 
 ## Installation
 

@@ -33,7 +33,7 @@ format(s::Server) = getfield(s, :format)
 format(s) = DEFAULT_FORMAT
 
 """
-    get_capabilities(server) -> Dict
+    get_capabilities(server)
 
 Get server capabilities.
 """
