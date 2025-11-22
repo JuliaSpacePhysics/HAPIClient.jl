@@ -9,7 +9,7 @@ abstract type AbstractServer end
     url::String
     id::String
     title::String
-    HAPI::Union{String,Nothing} = nothing
+    HAPI::Union{String, Nothing} = nothing
     format::String = DEFAULT_FORMAT
 end
 
@@ -21,16 +21,25 @@ url(s, t) = "$(url(s))/$t"
 # CSA = Server(; url="https://csatools.esac.esa.int/HapiServer/hapi", id="CSA", title="Cluster Science Archive", HAPI="3.2", format="csv")
 
 # Define available servers
-const SERVERS = Dict{String,Server}()
+const SERVERS = Dict{String, Server}()
 
 register_server!(server::Server) = (SERVERS[uppercase(server.id)] = server)
 
-"""Get a HAPI server instance by its ID."""
+"""
+    Server(id)
+
+Get a HAPI server instance by its ID.
+
+# Examples
+```julia
+cdaweb = Server("CDAWeb") # same as HAPIClient.CDAWeb
+```
+"""
 Server(id) = SERVERS[uppercase(id)]
 
 format(s::Server) = getfield(s, :format)
 """Default format for HAPI servers."""
-format(s) = DEFAULT_FORMAT
+format(_) = DEFAULT_FORMAT
 
 """
     get_capabilities(server)
@@ -47,7 +56,7 @@ end
 
 Load HAPI servers from a JSON file at the specified URL.
 """
-function load_servers_from_json(; url=DEFAULT_SERVERS_JSON_URL, register=false)
+function load_servers_from_json(; url = DEFAULT_SERVERS_JSON_URL, register = false)
     # Fetch the JSON data: try to load from URL first, fall back to file if HTTP fails
     servers_data = try
         response = HTTP.get(url)
@@ -60,11 +69,11 @@ function load_servers_from_json(; url=DEFAULT_SERVERS_JSON_URL, register=false)
     # Register each server
     servers = map(servers_data) do server_info
         Server(
-            url=server_info["x_url"],
-            id=get(server_info, "id", ""),
-            title=get(server_info, "title", ""),
-            HAPI=get(server_info, "HAPI", nothing),
-            format=get(server_info, "format", DEFAULT_FORMAT)
+            url = server_info["x_url"],
+            id = get(server_info, "id", ""),
+            title = get(server_info, "title", ""),
+            HAPI = get(server_info, "HAPI", nothing),
+            format = get(server_info, "format", DEFAULT_FORMAT)
         )
     end
 
