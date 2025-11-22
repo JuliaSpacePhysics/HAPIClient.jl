@@ -125,7 +125,7 @@ using CairoMakie
 f = Figure()
 for (i, var) in enumerate(data)
     m = meta(var)
-    ax = Axis(f[i,1]; xlabel="Time", ylabel=m["name"], title=m["description"])
+    ax = Axis(f[i,1]; ylabel=m["name"], title=m["description"])
     t = times(var)
     for c in eachcol(var)
         lines!(t, c)
