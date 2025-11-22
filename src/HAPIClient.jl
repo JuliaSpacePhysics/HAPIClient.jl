@@ -13,7 +13,7 @@ using SpaceDataModel: name, units, meta
 import SpaceDataModel: times
 
 export hapi, get_data, meta, times
-export HAPIVariable, HAPIVariables
+export HAPIVariable, HAPIVariables, Server
 
 json_parse(x) = JSON.parse(String(x))
 
@@ -45,11 +45,14 @@ hapi(server, dataset, parameters, tmin, tmax; kwargs...) = get_data(server, data
 
 function __init__()
     ccall(:jl_generating_output, Cint, ()) == 1 && return nothing
-    load_servers_from_json(; register=true)
-    # export servers
-    foreach(values(SERVERS)) do value
-        sym = Symbol(value.id)
-        @eval const $sym = $value
+    load_servers_from_json(; register = true)
+    return Base.invokelatest(_define_server_constants)
+end
+
+function _define_server_constants()
+    return foreach(values(SERVERS)) do server
+        sym = Symbol(server.id)
+        @eval const $sym = $server
         @eval export $sym
     end
 end
