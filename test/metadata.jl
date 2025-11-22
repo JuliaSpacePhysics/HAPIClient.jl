@@ -2,6 +2,8 @@
     servers = hapi()
     @test "https://cdaweb.gsfc.nasa.gov/hapi" in servers
     @test length(servers) > 0
+
+    @test HAPIClient.get_capabilities(CDAWeb)["status"]["code"] == 1200
 end
 
 @testitem "Catalog" begin

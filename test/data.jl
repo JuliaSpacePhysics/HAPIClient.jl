@@ -3,8 +3,8 @@
 @testitem "get_data" begin
     id = "CDAWeb/AC_H0_MFI/Magnitude,BGSEc"
     tmin = "2001-01-01T05"
-    tmax =  "2001-01-01T06"
-    data = get_data(id, [tmin, tmax]; verbose=1)
+    tmax = "2001-01-01T06"
+    data = get_data(id, [tmin, tmax]; verbose = 1)
     @test data.Magnitude == data[1]
     @test length(data) == 2
     @test length(times(data)) == 225
@@ -104,4 +104,5 @@ end
     tmax = "2001-01-01T06:00:00"
 
     @test_nowarn hapi(server, dataset, parameters, tmin, tmax)
+    @time hapi(server, dataset, parameters, tmin, tmax)
 end
