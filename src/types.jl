@@ -1,3 +1,5 @@
+abstract type AbstractHAPIVariable{T, N} <: AbstractDataVariable{T, N} end
+
 """
 An array-like object that represents a HAPI variable.
 
@@ -7,7 +9,7 @@ An array-like object that represents a HAPI variable.
 - `time`: The time axis (use `times(x)` to access).
 - `meta`: The metadata (use `meta(x)` to access).
 """
-struct HAPIVariable{T, N, A <: AbstractArray{T, N}, Tt <: AbstractVector, M <: AbstractDict} <: AbstractDataVariable{T, N}
+struct HAPIVariable{T, N, A <: AbstractArray{T, N}, Tt <: AbstractVector, M <: AbstractDict} <: AbstractHAPIVariable{T, N}
     data::A
     time::Tt
     meta::M
@@ -115,14 +117,3 @@ end
 HAPIVariable(d::AbstractDict, meta, i::Integer) = HAPIVariable(d, i)
 
 colsize(var::HAPIVariable) = colsize(meta(var))
-
-# when units have more than one value, return an array
-function hapi_uparse(u)
-    isnothing(u) && return 1
-    u == "UTC" && return 1
-    u == "degrees" && return u"°"
-    return uparse(u)
-end
-hapi_uparse(units::AbstractArray) = hapi_uparse.(units)
-
-Unitful.unit(var::HAPIVariable) = hapi_uparse.(units(var))

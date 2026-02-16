@@ -6,9 +6,7 @@ import JSON
 using Dates
 import CSV
 using Tables
-using Unitful
 using SpaceDataModel: AbstractDataVariable, parse_datetime
-import Unitful: unit
 using SpaceDataModel: name, units, meta
 import SpaceDataModel: times
 
