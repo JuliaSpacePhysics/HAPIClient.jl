@@ -1,7 +1,6 @@
-module DimensionalDataExt
+module HAPIClientDimensionalDataExt
 using DimensionalData
 using HAPIClient
-using Unitful: unit
 using HAPIClient: colsize, name, meta
 using SpaceDataModel: times
 import DimensionalData: DimArray, DimStack, dims
@@ -17,12 +16,12 @@ DimensionalData.dims(v::HAPIVariable) =
     end
 
 """
-    DimArray(v::HAPIVariable; add_unit=true)
+    DimArray(v::HAPIVariable)
 
 Convert a `HAPIVariable` to a `DimArray`.
 """
-function DimensionalData.DimArray(v::HAPIVariable; add_unit=true)
-    values = add_unit ? parent(v) * unit(v) : parent(v)
+function DimensionalData.DimArray(v::HAPIVariable)
+    values = parent(v)
     metadata = Dict{Any,Any}(meta(v))
     DimArray(values, dims(v); name=Symbol(name(v)), metadata)
 end

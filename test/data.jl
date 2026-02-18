@@ -1,6 +1,7 @@
 # Reference: https://github.com/hapi-server/client-matlab/blob/master/hapi_test.m
 
 @testitem "get_data" begin
+    using Unitful
     id = "CDAWeb/AC_H0_MFI/Magnitude,BGSEc"
     tmin = "2001-01-01T05"
     tmax = "2001-01-01T06"
@@ -10,6 +11,7 @@
     @test length(times(data)) == 225
     @test meta(data[1])["name"] == "Magnitude"
     @test_nowarn display(data)
+    @test unit(data.Magnitude) == u"nT"
 
     for fmt in ["csv", "json"]
         @test_nowarn get_data(id, [tmin, tmax]; format = fmt)
