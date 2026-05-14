@@ -52,21 +52,17 @@ function get_capabilities(server)
 end
 
 """
-    load_servers_from_json(; url=DEFAULT_SERVERS_JSON_URL, register=false)
+    load_servers_from_json(source=joinpath(@__DIR__, "abouts.json"); register=false)
 
-Load HAPI servers from a JSON file at the specified URL.
+Load HAPI servers from a local JSON file or remote URL.
 """
-function load_servers_from_json(; url = DEFAULT_SERVERS_JSON_URL, register = false)
-    # Fetch the JSON data: try to load from URL first, fall back to file if HTTP fails
-    servers_data = try
-        response = HTTP.get(url)
-        json_parse(response.body)
-    catch
-        @warn "HTTP request failed, falling back to local file"
-        JSON.parsefile(joinpath(@__DIR__, "abouts.json"))
+function load_servers_from_json(source = joinpath(@__DIR__, "abouts.json"); register = false)
+    servers_data = if startswith(string(source), "http")
+        json_parse(HTTP.get(source).body)
+    else
+        JSON.parsefile(source)
     end
 
-    # Register each server
     servers = map(servers_data) do server_info
         Server(
             url = server_info["x_url"],
@@ -80,4 +76,13 @@ function load_servers_from_json(; url = DEFAULT_SERVERS_JSON_URL, register = fal
     register && register_server!.(servers)
 
     return servers
+end
+
+"""
+    refresh_servers!(; url=DEFAULT_SERVERS_JSON_URL)
+
+Fetch the latest server list from the remote URL and update the registry.
+"""
+function refresh_servers!(; url = DEFAULT_SERVERS_JSON_URL)
+    return load_servers_from_json(url; register = true)
 end
