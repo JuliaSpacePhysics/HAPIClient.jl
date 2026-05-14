@@ -7,6 +7,22 @@ using TestItems, TestItemRunner
     Aqua.test_all(HAPIClient)
 end
 
+@testitem "HAPISchema" begin
+    using HAPIClient: HAPISchema, get_data
+    using SpaceDataModel: get_schema
+
+    id  = "CDAWeb/AC_H0_MFI/Magnitude,BGSEc"
+    data = get_data(id, ["2001-01-01T05", "2001-01-01T06"])
+    mag = data.Magnitude
+
+    @test get_schema(mag) isa HAPISchema
+
+    attrs = HAPISchema()(mag)
+    @test attrs[:name] == "Magnitude"
+    @test attrs[:unit] == "nT"
+    @test attrs[:desc] isa AbstractString
+end
+
 @testitem "DateTime" begin
     using HAPIClient: HAPIDateTime
     @test HAPIDateTime("2001-01-01") == "2001-01-01T00:00:00.000Z"

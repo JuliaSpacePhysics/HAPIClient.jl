@@ -86,19 +86,7 @@ function HAPIVariable(data::CSV.File, params, i::Integer)
             Tables.getcolumn(data, i)
         end
     end
-    return HAPIVariable(values, time, param)
-end
-
-"""
-    HAPIVariable(data, params, i)
-
-Construct a `HAPIVariable` object from a JSON-parsed `data` and `params` at index `i`.
-"""
-function HAPIVariable(data, params, i::Integer)
-    time = @. DateTime(getindex(data, 1), DEFAULT_DATE_FORMAT)
-    param = params[i + 1]
-    values = getindex.(data, i + 1)
-    return HAPIVariable(values, time, param)
+    return HAPIVariable(values, time, SchemaDict(HAPISchema(), param))
 end
 
 """
@@ -111,7 +99,7 @@ function HAPIVariable(d::AbstractDict, i::Integer)
     param = d["parameters"][i + 1]
     time = @. DateTime(getindex(data, 1), DEFAULT_DATE_FORMAT)
     values = getindex.(data, i + 1)
-    return HAPIVariable(values, time, param)
+    return HAPIVariable(values, time, SchemaDict(HAPISchema(), param))
 end
 
 HAPIVariable(d::AbstractDict, meta, i::Integer) = HAPIVariable(d, i)
