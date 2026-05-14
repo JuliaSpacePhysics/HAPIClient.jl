@@ -11,7 +11,7 @@ using SpaceDataModel: name, units, meta
 import SpaceDataModel: times
 
 export hapi, get_data, meta, times
-export HAPIVariable, HAPIVariables, Server
+export HAPIVariable, HAPIVariables, Server, refresh_servers!
 
 json_parse(x) = JSON.parse(String(x))
 
@@ -41,17 +41,13 @@ hapi(server, dataset, parameters) = get_parameters(server, dataset, parameters)
 hapi(server, dataset, tmin, tmax; kwargs...) = get_data(server, dataset, "", tmin, tmax; kwargs...)
 hapi(server, dataset, parameters, tmin, tmax; kwargs...) = get_data(server, dataset, parameters, tmin, tmax; kwargs...)
 
-function __init__()
-    ccall(:jl_generating_output, Cint, ()) == 1 && return nothing
-    load_servers_from_json(; register = true)
-    return Base.invokelatest(_define_server_constants)
-end
-
-function _define_server_constants()
-    return foreach(values(SERVERS)) do server
-        sym = Symbol(server.id)
-        @eval const $sym = $server
-        @eval export $sym
+# Load bundled server list and define per-server constants at precompile time.
+# Use refresh_servers!() to update from the remote registry at runtime.
+let _servers = load_servers_from_json(; register = true)
+    for _server in _servers
+        _sym = Symbol(_server.id)
+        @eval const $_sym = $_server
+        @eval export $_sym
     end
 end
 
