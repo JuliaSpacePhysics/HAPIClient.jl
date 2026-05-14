@@ -17,6 +17,7 @@
         @test_nowarn get_data(id, [tmin, tmax]; format = fmt)
     end
 end
+
 @testitem "TestData2.0" begin
     server = "http://hapi-server.org/servers/TestData2.0/hapi"
     dataset = "dataset1"
@@ -106,5 +107,6 @@ end
     tmax = "2001-01-01T06:00:00"
 
     @test_nowarn hapi(server, dataset, parameters, tmin, tmax)
+    @test_nowarn hapi(server, dataset, parameters, tmin, tmax; format = "json")
     @time hapi(server, dataset, parameters, tmin, tmax)
 end

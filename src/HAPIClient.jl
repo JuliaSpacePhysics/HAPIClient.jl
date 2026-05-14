@@ -20,6 +20,7 @@ include("metadata.jl")
 include("data.jl")
 include("specs/time.jl")
 include("specs/parameter.jl")
+include("schema.jl")
 include("types.jl")
 
 """
