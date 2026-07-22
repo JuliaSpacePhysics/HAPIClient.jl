@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Usage · HAPIClient.jl</title><meta name="title" content="Usage · HAPIClient.jl"/><meta property="og:title" content="Usage · HAPIClient.jl"/><meta property="twitter:title" content="Usage · HAPIClient.jl"/><meta name="description" content="Documentation for HAPIClient.jl."/><meta property="og:description" content="Documentation for HAPIClient.jl."/><meta property="twitter:description" content="Documentation for HAPIClient.jl."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">HAPIClient.jl</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><a class="tocitem" href="../">Home</a></li><li class="is-active"><a class="tocitem" href>Usage</a><ul class="internal"><li><a class="tocitem" href="#Basic-Usage"><span>Basic Usage</span></a></li><li><a class="tocitem" href="#Data-Retrieval-and-Access"><span>Data Retrieval and Access</span></a></li><li><a class="tocitem" href="#Working-with-Different-Servers"><span>Working with Different Servers</span></a></li><li><a class="tocitem" href="#Data-Analysis"><span>Data Analysis</span></a></li></ul></li><li><a class="tocitem" href="../api/">API Reference</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li class="is-active"><a href>Usage</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Usage</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/JuliaSpacePhysics/HAPIClient.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/JuliaSpacePhysics/HAPIClient.jl/blob/main/docs/src/usage.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Usage-Guide"><a class="docs-heading-anchor" href="#Usage-Guide">Usage Guide</a><a id="Usage-Guide-1"></a><a class="docs-heading-anchor-permalink" href="#Usage-Guide" title="Permalink"></a></h1><p>This guide provides detailed examples of how to use <code>HAPIClient.jl</code> to access heliophysics data from HAPI servers.</p><h2 id="Basic-Usage"><a class="docs-heading-anchor" href="#Basic-Usage">Basic Usage</a><a id="Basic-Usage-1"></a><a class="docs-heading-anchor-permalink" href="#Basic-Usage" title="Permalink"></a></h2><h3 id="Listing-Available-Servers"><a class="docs-heading-anchor" href="#Listing-Available-Servers">Listing Available Servers</a><a id="Listing-Available-Servers-1"></a><a class="docs-heading-anchor-permalink" href="#Listing-Available-Servers" title="Permalink"></a></h3><p>Start by exploring what HAPI servers are available:</p><pre><code class="language-julia hljs">using HAPIClient
+
+# List all available HAPI servers
+servers = hapi()</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">20-element Vector{SubString{String}}:
+ &quot;https://cdaweb.gsfc.nasa.gov/hapi&quot;
+ &quot;http://hapi-server.org/servers/SSCWeb/hapi&quot;
+ &quot;https://amda.irap.omp.eu/service/hapi&quot;
+ &quot;https://csatools.esac.esa.int/HapiServer/hapi&quot;
+ &quot;https://iswa.gsfc.nasa.gov/hapi&quot;
+ &quot;https://vires.services/hapi&quot;
+ &quot;https://imag-data.bgs.ac.uk/GIN_V1/hapi&quot;
+ &quot;https://supermag.jhuapl.edu/hapi&quot;
+ &quot;https://wdcapi.bgs.ac.uk/hapi&quot;
+ &quot;http://lasp.colorado.edu/lisird/hapi&quot;
+ &quot;https://hapi.spaceweather.knmi.nl/hapi&quot;
+ &quot;https://api.helioviewer.org/hapi/Helioviewer/hapi&quot;
+ &quot;https://planet.physics.uiowa.edu/das/das2Server/hapi&quot;
+ &quot;https://hapi-server.org/servers-dev/URLWatcher/hapi&quot;
+ &quot;http://hapi-server.org/servers/TestData2.0/hapi&quot;
+ &quot;http://hapi-server.org/servers/TestData2.1/hapi&quot;
+ &quot;http://hapi-server.org/servers/TestData3.0/hapi&quot;
+ &quot;http://hapi-server.org/servers/TestData3.1/hapi&quot;
+ &quot;http://hapi-server.org/servers/TestData3.2/hapi&quot;
+ &quot;http://hapi-server.org/servers/TestData3.3/hapi&quot;</code></pre><h3 id="Getting-Dataset-Catalogs"><a class="docs-heading-anchor" href="#Getting-Dataset-Catalogs">Getting Dataset Catalogs</a><a id="Getting-Dataset-Catalogs-1"></a><a class="docs-heading-anchor-permalink" href="#Getting-Dataset-Catalogs" title="Permalink"></a></h3><p>Once you know which servers are available, you can browse their catalogs:</p><pre><code class="language-julia hljs"># Get catalog of available datasets from CDAWeb
+catalog = hapi(CDAWeb)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">3593-element Vector{Any}:
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;A1_K0_MPA&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;A2_K0_MPA&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;AC_AT_DEF&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;AC_H0_MFI&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;AC_H0_SWE&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;AC_H1_EPM&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;AC_H1_MFI&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;AC_H1_SIS&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;AC_H2_CRIS&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;AC_H2_EPM&quot;)
+ ⋮
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;WI_PLSP_3DP&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;WI_PM_3DP&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;WI_SFPD_3DP&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;WI_SFSP_3DP&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;WI_SOPD_3DP&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;WI_SOSP_3DP&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;WI_STRAHL0_SWE&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;WI_SW-ION-DIST_SWE-FARADAY&quot;)
+ JSON.Object{String, Any}(&quot;id&quot; =&gt; &quot;WI_WA_RAD1_L3_DF&quot;)</code></pre><h3 id="Dataset-Information"><a class="docs-heading-anchor" href="#Dataset-Information">Dataset Information</a><a id="Dataset-Information-1"></a><a class="docs-heading-anchor-permalink" href="#Dataset-Information" title="Permalink"></a></h3><p>Get detailed information about parameters in a specific dataset:</p><pre><code class="language-julia hljs">dataset = &quot;AC_H0_MFI&quot;
+params = hapi(CDAWeb, dataset)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">JSON.Object{String, Any} with 7 entries:
+  &quot;HAPI&quot;        =&gt; &quot;2.0&quot;
+  &quot;resourceURL&quot; =&gt; &quot;https://cdaweb.gsfc.nasa.gov/misc/NotesA.html#AC_H0_MFI&quot;
+  &quot;contact&quot;     =&gt; &quot;N. Ness @ Bartol Research Institute&quot;
+  &quot;parameters&quot;  =&gt; Any[Object{String, Any}(&quot;name&quot;=&gt;&quot;Time&quot;, &quot;length&quot;=&gt;24, &quot;units…
+  &quot;startDate&quot;   =&gt; &quot;1997-09-02T00:00:12Z&quot;
+  &quot;stopDate&quot;    =&gt; &quot;2026-06-11T23:59:53Z&quot;
+  &quot;status&quot;      =&gt; Object{String, Any}(&quot;code&quot;=&gt;1200, &quot;message&quot;=&gt;&quot;OK&quot;)</code></pre><h2 id="Data-Retrieval-and-Access"><a class="docs-heading-anchor" href="#Data-Retrieval-and-Access">Data Retrieval and Access</a><a id="Data-Retrieval-and-Access-1"></a><a class="docs-heading-anchor-permalink" href="#Data-Retrieval-and-Access" title="Permalink"></a></h2><h3 id="Basic-Data-Download"><a class="docs-heading-anchor" href="#Basic-Data-Download">Basic Data Download</a><a id="Basic-Data-Download-1"></a><a class="docs-heading-anchor-permalink" href="#Basic-Data-Download" title="Permalink"></a></h3><p>Retrieve data for specific parameters within a time range:</p><pre><code class="language-julia hljs">using Dates
+
+dataset = &quot;AC_H0_MFI&quot;
+parameters = &quot;Magnitude,BGSEc&quot;
+tmin = DateTime(2001, 1, 1, 5, 0, 0)
+tmax = DateTime(2001, 1, 1, 6, 0, 0)
+
+# Retrieve the data
+data = hapi(CDAWeb, dataset, parameters, tmin, tmax)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">HAPIVariables: <span class="sgr38_5" style="color:#ff875f">CDAWeb/AC_H0_MFI</span> (https://cdaweb.gsfc.nasa.gov/hapi/data?time.min=2001-01-01T05%3A00%3A00.000Z&amp;parameters=Magnitude%2CBGSEc&amp;format=csv&amp;id=AC_H0_MFI&amp;time.max=2001-01-01T06%3A00%3A00.000Z)
+  <span class="sgr38_5" style="color:#00afaf">Magnitude</span> [Time Range: 2001-01-01T05:00:14 to 2001-01-01T05:59:58, Units: nT, Size: (225,)]
+  <span class="sgr38_5" style="color:#00afaf">BGSEc</span> [Time Range: 2001-01-01T05:00:14 to 2001-01-01T05:59:58, Units: nT, Size: (225, 3)]
+Metadata - SpaceDataModel.NoMetadata()</code></pre><h3 id="Alternative-Path-Format"><a class="docs-heading-anchor" href="#Alternative-Path-Format">Alternative Path Format</a><a id="Alternative-Path-Format-1"></a><a class="docs-heading-anchor-permalink" href="#Alternative-Path-Format" title="Permalink"></a></h3><p>You can also use a path-like format for data retrieval. The path format is <code>&quot;server/dataset/parameter&quot;</code>, where datasets may contain slashes:</p><pre><code class="language-julia hljs">data = get_data(&quot;CDAWeb/AC_H0_MFI/Magnitude,BGSEc&quot;, tmin, tmax)</code></pre><div class="admonition is-info" id="Note-eacdcbde24e9898c"><header class="admonition-header">Note<a class="admonition-anchor" href="#Note-eacdcbde24e9898c" title="Permalink"></a></header><div class="admonition-body"><p>This path format cannot handle cases where both the dataset and parameter contain slashes (e.g., dataset=<code>abc/123</code> and parameter=<code>p1/v1</code>). In such cases, use the <code>hapi()</code> function directly.</p></div></div><h3 id="Accessing-Retrieved-Data"><a class="docs-heading-anchor" href="#Accessing-Retrieved-Data">Accessing Retrieved Data</a><a id="Accessing-Retrieved-Data-1"></a><a class="docs-heading-anchor-permalink" href="#Accessing-Retrieved-Data" title="Permalink"></a></h3><p>Once you have retrieved data, you can access individual variables:</p><pre><code class="language-julia hljs">Magnitude = data.Magnitude # or data[1] if you know the order (same as `parameters` order)
+BGSEc = data.BGSEc # or data[2]
+var = data[2]</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">HAPIVariable{Float64, 2, Matrix{Float64}, Vector{Dates.DateTime}, SpaceDataModel.SchemaDict{HAPIClient.HAPISchema, String, Any, JSON.Object{String, Any}}}: <span class="sgr38_5" style="color:#00afaf">BGSEc</span>
+  Time Range: 2001-01-01T05:00:14 to 2001-01-01T05:59:58
+  Units: nT
+  Size: (225, 3)
+  Memory Usage: 7.710 KiB
+  Metadata:
+    size: Any[3]
+    name: BGSEc
+    description: Magnetic Field Vector in GSE Cartesian coordinates (16 sec)
+    units: nT
+    type: double
+    fill: -1.0E31</code></pre><p>Retrieve the values</p><pre><code class="language-julia hljs">values = parent(var)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">225×3 Matrix{Float64}:
+ -3.588   0.2    -2.425
+ -3.534   0.149  -2.42
+ -3.543   0.14   -2.427
+ -3.581   0.067  -2.47
+ -3.536   0.062  -2.463
+ -3.557   0.063  -2.452
+ -3.557   0.02   -2.429
+ -3.593   0.04   -2.409
+ -3.655  -0.017  -2.396
+ -3.596   0.073  -2.406
+  ⋮              
+ -3.895   0.251  -2.019
+ -3.877   0.229  -2.036
+ -3.934   0.285  -2.028
+ -3.781   0.283  -2.074
+ -3.792   0.328  -2.15
+ -3.831   0.333  -2.123
+ -3.528   0.03   -2.519
+ -3.398   0.072  -2.647
+ -3.454   0.044  -2.663</code></pre><p>Retrieve the timestamps</p><pre><code class="language-julia hljs">timestamps = times(var)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">225-element Vector{Dates.DateTime}:
+ 2001-01-01T05:00:14
+ 2001-01-01T05:00:30
+ 2001-01-01T05:00:46
+ 2001-01-01T05:01:02
+ 2001-01-01T05:01:18
+ 2001-01-01T05:01:34
+ 2001-01-01T05:01:50
+ 2001-01-01T05:02:06
+ 2001-01-01T05:02:22
+ 2001-01-01T05:02:38
+ ⋮
+ 2001-01-01T05:57:50
+ 2001-01-01T05:58:06
+ 2001-01-01T05:58:22
+ 2001-01-01T05:58:38
+ 2001-01-01T05:58:54
+ 2001-01-01T05:59:10
+ 2001-01-01T05:59:26
+ 2001-01-01T05:59:42
+ 2001-01-01T05:59:58</code></pre><p>Retrieve the metadata</p><pre><code class="language-julia hljs">metadata = meta(var)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">SpaceDataModel.SchemaDict{HAPIClient.HAPISchema, String, Any, JSON.Object{String, Any}} with 6 entries:
+  &quot;size&quot;        =&gt; Any[3]
+  &quot;name&quot;        =&gt; &quot;BGSEc&quot;
+  &quot;description&quot; =&gt; &quot;Magnetic Field Vector in GSE Cartesian coordinates (16 sec)&quot;
+  &quot;units&quot;       =&gt; &quot;nT&quot;
+  &quot;type&quot;        =&gt; &quot;double&quot;
+  &quot;fill&quot;        =&gt; &quot;-1.0E31&quot;</code></pre><h2 id="Working-with-Different-Servers"><a class="docs-heading-anchor" href="#Working-with-Different-Servers">Working with Different Servers</a><a id="Working-with-Different-Servers-1"></a><a class="docs-heading-anchor-permalink" href="#Working-with-Different-Servers" title="Permalink"></a></h2><h3 id="CSA-Example"><a class="docs-heading-anchor" href="#CSA-Example">CSA Example</a><a id="CSA-Example-1"></a><a class="docs-heading-anchor-permalink" href="#CSA-Example" title="Permalink"></a></h3><pre><code class="language-julia hljs"># Example with CSA (Cluster Science Archive) server
+dataset = &quot;C4_CP_FGM_FULL&quot;
+parameters = &quot;B_vec_xyz_gse,B_mag&quot;
+tmin = DateTime(2001, 6, 11, 0, 0, 0)
+tmax = DateTime(2001, 6, 11, 0, 1, 0)
+data = hapi(CSA, dataset, parameters, tmin, tmax)</code></pre><h3 id="INTERMAGNET-Example"><a class="docs-heading-anchor" href="#INTERMAGNET-Example">INTERMAGNET Example</a><a id="INTERMAGNET-Example-1"></a><a class="docs-heading-anchor-permalink" href="#INTERMAGNET-Example" title="Permalink"></a></h3><pre><code class="language-julia hljs"># Example with INTERMAGNET server (datasets with slashes in names)
+dataset = &quot;aae/definitive/PT1M/xyzf&quot;
+parameters = &quot;Field_Vector&quot;
+tmin = DateTime(2001, 6, 11, 0, 0, 0)
+tmax = DateTime(2001, 6, 11, 0, 1, 0)
+data = hapi(INTERMAGNET, dataset, parameters, tmin, tmax)
+data = get_data(&quot;INTERMAGNET/aae/definitive/PT1M/xyzf/Field_Vector&quot;, tmin, tmax)</code></pre><h2 id="Data-Analysis"><a class="docs-heading-anchor" href="#Data-Analysis">Data Analysis</a><a id="Data-Analysis-1"></a><a class="docs-heading-anchor-permalink" href="#Data-Analysis" title="Permalink"></a></h2><p>The retrieved data integrates well with Julia&#39;s ecosystem:</p><pre><code class="language-julia hljs">using CairoMakie
+
+f = Figure()
+for (i, var) in enumerate(data)
+    m = meta(var)
+    ax = Axis(f[i,1]; ylabel=m[&quot;name&quot;], title=m[&quot;description&quot;])
+    t = times(var)
+    for c in eachcol(var)
+        lines!(t, c)
+    end
+    i != length(data) &amp;&amp; hidexdecorations!(; grid=false)
+end
+f</code></pre><img src="94a87c13.png" alt="Example block output"/><p>For advanced visualization capabilities, <code>HAPIClient.jl</code> works well with the <code>SPEDAS.jl</code> ecosystem. See the <a href="https://JuliaSpacePhysics.github.io/SPEDAS.jl/dev/tutorials/getting-started/">SPEDAS.jl quickstart guide</a> for detailed visualization examples.</p></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../">« Home</a><a class="docs-footer-nextpage" href="../api/">API Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.17.0 on <span class="colophon-date" title="Wednesday 22 July 2026 07:16">Wednesday 22 July 2026</span>. Using Julia version 1.12.6.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
