@@ -74,7 +74,7 @@ colsize(param) = prod(get(param, "size", 1))
 Construct a `HAPIVariable` object from CSV.File `data` and `params` at index `i`.
 """
 function HAPIVariable(data::CSV.File, params, i::Integer)
-    time = Tables.getcolumn(data, 1)
+    time = to_datetime(Tables.getcolumn(data, 1))
     param = params[i + 1]
     size = colsize(param)
     coloffset = mapreduce(colsize, +, @view(params[1:i])) + 1
