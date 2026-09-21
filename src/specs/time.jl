@@ -10,3 +10,7 @@ function HAPIDateTime(t::AbstractString)
 end
 
 HAPIDateTime(t::DateTime) = Dates.format(t, DEFAULT_DATE_FORMAT)
+
+# CSV >= 1 infers `Durations.Timestamp` for the time column
+to_datetime(t::AbstractVector{<:Union{DateTime,AbstractString}}) = t
+to_datetime(t::AbstractVector) = DateTime.(t)

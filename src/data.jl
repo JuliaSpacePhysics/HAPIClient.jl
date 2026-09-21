@@ -27,7 +27,7 @@ function get_data(server, dataset, parameters, tmin, tmax; format = format(serve
     response = HTTP.get(uri; verbose, kw...)
 
     data = if format == "csv"
-        CSV.File(response.body; header = false, dateformat = DEFAULT_DATE_FORMAT)
+        CSV.File(response.body; header = false, delim = ',', dateformat = DEFAULT_DATE_FORMAT, stringtype = String)
     elseif format == "json"
         json_parse(response.body)
     elseif format == "binary"
