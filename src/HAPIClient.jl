@@ -1,7 +1,7 @@
 module HAPIClient
 
 using HTTP
-using HTTP: request_uri, URI
+using URIs: URI
 import JSON
 using Dates
 import CSV

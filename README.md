@@ -2,19 +2,14 @@
 
 [![DOI](https://zenodo.org/badge/935193759.svg)](https://doi.org/10.5281/zenodo.15108960)
 
-[![Build Status](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/JuliaSpacePhysics/HAPIClient.jl/actions/workflows/CI.yml?query=branch%3Amain)
-[![Aqua QA](https://raw.githubusercontent.com/JuliaTesting/Aqua.jl/master/badge.svg)](https://github.com/JuliaTesting/Aqua.jl)
-[![Coverage](https://codecov.io/gh/JuliaSpacePhysics/HAPIClient.jl/branch/main/graph/badge.svg)](https://codecov.io/gh/JuliaSpacePhysics/HAPIClient.jl)
-
 A Julia client for the Heliophysics Application Programmer's Interface (HAPI).
 
 For information on using the package, see the [documentation](https://JuliaSpacePhysics.github.io/HAPIClient.jl/dev/). For the list of HAPI servers and datasets, see [HAPI Server Browser](https://hapi-server.org/servers/).
 
-**Installation**: at the Julia REPL, run `using Pkg; Pkg.add("HAPIClient")`
-
 ## Usage Example
 
 ```julia
+using Pkg; Pkg.add("HAPIClient")
 using HAPIClient
 using Dates
 

@@ -49,7 +49,7 @@ a Vector of Parameter objects.
 HAPI info response JSON structure: https://github.com/hapi-server/data-specification/blob/master/hapi-dev/HAPI-data-access-spec-dev.md#36-info
 """
 function get_parameters(server, id)
-    response = HTTP.get(url(server, "info"); query = (; id))
+    response = HTTP.get(url(server, "info"); query = Dict("id" => id))
     return json_parse(response.body)
 end
 
@@ -59,7 +59,7 @@ end
 Get a dictionary containing the HAPI info metadata for each parameter in the comma-separated string `parameters`.
 """
 function get_parameters(server, id, parameters)
-    query = (; id, parameters)
+    query = Dict("id" => id, "parameters" => parameters)
     response = HTTP.get(url(server, "info"); query)
     return json_parse(response.body)
 end

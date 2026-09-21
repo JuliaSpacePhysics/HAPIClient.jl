@@ -22,7 +22,7 @@ function get_data(server, dataset, parameters, tmin, tmax; format = format(serve
         "time.max" => tmax,
         "format" => format
     )
-    uri = request_uri(url, query)
+    uri = URI(URI(url); query)
     verbose > 0 && @info "Getting data from $uri"
     response = HTTP.get(uri; verbose, kw...)
 

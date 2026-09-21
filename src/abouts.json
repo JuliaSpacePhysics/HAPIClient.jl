@@ -5,6 +5,10 @@
     "title": "CDAWeb",
     "contact": "Robert Candey",
     "contactID": "NASA-SPDF-Support@nasa.onmicrosoft.com",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/Robert.M.Candey",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -14,7 +18,7 @@
         "parameters": "BGSEc"
       }
     },
-    "x_LastUpdateAttempt": "2026-05-13T15:05:07Z",
+    "x_LastUpdateAttempt": "2026-09-21T18:44:29Z",
     "x_LastUpdateError": "400 Client Error: 400 for url: https://cdaweb.gsfc.nasa.gov/hapi/about"
   },
   {
@@ -23,6 +27,10 @@
     "title": "SSCWeb",
     "contact": "Bob Weigel",
     "contactID": "rweigel@gmu.edu",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/Robert.S.Weigel",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -32,7 +40,7 @@
         "parameters": "X_GSE,Y_GSE,Z_GSE"
       }
     },
-    "x_LastUpdateAttempt": "2026-05-13T15:05:07Z",
+    "x_LastUpdateAttempt": "2026-09-21T18:44:29Z",
     "x_LastUpdateError": "404 Client Error: Not Found for url: http://hapi-server.org/servers/SSCWeb/hapi/about"
   },
   {
@@ -41,6 +49,10 @@
     "title": "AMDA",
     "contact": "Vincent Génot",
     "contactID": "amda@irap.omp.eu",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/Vincent.Genot",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -50,7 +62,7 @@
         "parameters": "ace_r"
       }
     },
-    "x_LastUpdateAttempt": "2026-05-13T15:05:08Z",
+    "x_LastUpdateAttempt": "2026-09-21T18:44:30Z",
     "x_LastUpdateError": "Expecting value: line 1 column 1 (char 0)"
   },
   {
@@ -59,6 +71,10 @@
     "title": "Cluster Science Archive",
     "contact": "https://www.cosmos.esa.int/web/csa/cluster-helpdesk",
     "contactID": "esdc_cluster_logs@cosmos.esa.int",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/UNKNOWN",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -76,23 +92,32 @@
       "message": "OK request successful"
     },
     "x_buildTime": "2024-03-12T07:42:00",
-    "x_LastUpdateAttempt": "2026-05-13T15:05:09Z"
+    "x_LastUpdateAttempt": "2026-09-21T18:44:31Z"
   },
   {
-    "x_url": "https://iswa.gsfc.nasa.gov/IswaSystemWebApp/hapi",
+    "x_url": "https://iswa.gsfc.nasa.gov/hapi",
     "id": "CCMC_ISWA",
     "title": "CCMC ISWA",
     "contact": "Rick Mullinix",
     "contactID": "richard.e.mullinix@nasa.gov",
-    "x_LastUpdateAttempt": "2026-05-13T15:05:09Z",
-    "x_LastUpdateError": "404 Client Error: Not Found for url: https://iswa.gsfc.nasa.gov/IswaSystemWebApp/hapi/about"
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/Richard.E.Mullinix",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
+    "x_LastUpdateAttempt": "2026-09-21T18:44:31Z",
+    "x_LastUpdateError": "404 Client Error: Not Found for url: https://iswa.gsfc.nasa.gov/hapi/about"
   },
   {
     "x_url": "https://vires.services/hapi",
     "id": "VirES-for-Swarm",
     "title": "VirES for Swarm",
+    "description": "Web API for the ESA Swarm mission products.",
     "contact": "feedback@vires.services",
     "contactID": "feedback@vires.services",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/UNKNOWN",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -102,20 +127,24 @@
         "parameters": "F"
       }
     },
-    "description": "Web API for the ESA Swarm mission products.",
     "HAPI": "3.0",
     "status": {
       "code": 1200,
       "message": "OK"
     },
-    "x_LastUpdateAttempt": "2026-05-13T15:05:09Z"
+    "x_LastUpdateAttempt": "2026-09-21T18:44:32Z"
   },
   {
     "x_url": "https://imag-data.bgs.ac.uk/GIN_V1/hapi",
     "id": "INTERMAGNET",
     "title": "INTERMAGNET HAPI server",
+    "description": "This HAPI server provides datasets with IDs in the form IAGACode/DataType/Cadence/Components. IAGACode is the three-letter IAGA code (https://iaga-vobs.org/) for the observatory. DataType is one of: 'adjusted', 'definitive', 'quasi-def', 'reported' (https://tech-man.intermagnet.org/stable/appendices/terminology.html) or 'best-avail' for the best available data. See https://imag-data.bgs.ac.uk/GIN_V1/index.jsp#best_avail for a discussion of what 'best-avail' implies. Cadence is an ISO8601 duration. This server only offers minute ('PT1M') and second ('PT1S') cadence data. Components is one of: 'xyzf', 'hdzf', 'diff' (https://intermagnet.org/faq/10.geomagnetic-comp.html) or 'native' to use the components that the data provider sent the data in.",
     "contact": "e_ginman@bgs.ac.uk",
     "contactID": "e_ginman@bgs.ac.uk",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/UNKNOWN",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -125,35 +154,72 @@
         "parameters": "Field_Magnitude"
       }
     },
-    "HAPI": "3.1",
-    "description": "This HAPI server provides datasets with IDs in the form IAGACode/DataType/Cadence/Components. IAGACode is the three-letter IAGA code (https://iaga-vobs.org/) for the observatory. DataType is one of: 'adjusted', 'definitive', 'quasi-def', 'reported' (https://tech-man.intermagnet.org/stable/appendices/terminology.html) or 'best-avail' for the best available data. See https://imag-data.bgs.ac.uk/GIN_V1/index.jsp#best_avail for a discussion of what 'best-avail' implies. Cadence is an ISO8601 duration. This server only offers minute ('PT1M') and second ('PT1S') cadence data. Components is one of: 'xyzf', 'hdzf', 'diff' (https://intermagnet.org/faq/10.geomagnetic-comp.html) or 'native' to use the components that the data provider sent the data in.",
     "citation": "https://intermagnet.org/data_conditions.html",
     "x_warnings": [
       "Some institutes choose to embargo their data for a short time. For more information see https://imag-data.bgs.ac.uk/GIN_V1/index.jsp#embargo_data_plots"
     ],
+    "HAPI": "3.1",
     "status": {
       "code": 1200,
       "message": "ok"
     },
-    "x_LastUpdateAttempt": "2026-05-13T15:05:10Z"
+    "x_LastUpdateAttempt": "2026-09-21T18:44:33Z"
   },
   {
-    "x_url": "https://supermag.jhuapl.edu/hapi",
-    "id": "SuperMAG",
-    "title": "SuperMAG (dev version)",
-    "contact": "Sandy Antunes",
-    "contactID": "Sandy.Antunes@jhuapl.edu",
-    "dataTest": {
-      "name": "Ping Test",
-      "query": {
-        "dataset": "indices_all",
-        "start": "2018-01-18T00:00Z",
-        "stop": "2018-01-19T00:00Z",
-        "parameters": "SML"
-      }
+    "x_url": "https://api.phys.ucalgary.ca/hapi",
+    "id": "UCalgary/SRS",
+    "title": "UCalgary Space Remote Sensing HAPI Server",
+    "description": "HAPI server providing time series data from the University of Calgary Space Remote Sensing ground-based instrument arrays",
+    "contact": "Darren Chaddock (dchaddoc@ucalgary.ca)",
+    "HAPI": "3.3",
+    "status": {
+      "code": 1200,
+      "message": "OK"
     },
-    "x_LastUpdateAttempt": "2026-05-13T15:05:10Z",
-    "x_LastUpdateError": "404 Client Error: Not Found for url: https://supermag.jhuapl.edu/hapi/about"
+    "x_LastUpdateAttempt": "2026-09-21T18:44:34Z"
+  },
+  {
+    "x_url": "https://www.ncei.noaa.gov/cloud-access/space-weather-portal/api/v1/hapi",
+    "id": "NESDIS_SPACE_WEATHER_PORTAL",
+    "title": "NESDIS Space Weather Portal",
+    "contact": "ncei.info@noaa.gov",
+    "contactID": "andrew.wilson@noaa.gov",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/UNKNOWN",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
+    "HAPI": "3.2.0",
+    "status": {
+      "code": 1200,
+      "message": "OK"
+    },
+    "description": "Space weather data from NOAA platforms.",
+    "x_LastUpdateAttempt": "2026-09-21T18:44:35Z",
+    "x_LastChange": "2026-09-21T18:44:35Z",
+    "x_LastChangeDiff": {
+      "values_changed": {
+        "root": {
+          "new_value": {
+            "x_url": "https://www.ncei.noaa.gov/cloud-access/space-weather-portal/api/v1/hapi",
+            "id": "NESDIS_SPACE_WEATHER_PORTAL",
+            "title": "NESDIS Space Weather Portal",
+            "contact": "ncei.info@noaa.gov",
+            "contactID": "andrew.wilson@noaa.gov",
+            "x_SPASE": {
+              "PersonID": "spase://SMWG/Person/UNKNOWN",
+              "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+            },
+            "HAPI": "3.2.0",
+            "status": {
+              "code": 1200,
+              "message": "OK"
+            },
+            "description": "Space weather data from NOAA platforms."
+          },
+          "old_value": {}
+        }
+      }
+    }
   },
   {
     "x_url": "https://wdcapi.bgs.ac.uk/hapi",
@@ -161,6 +227,10 @@
     "title": "HAPI WDC (Edinburgh) Server",
     "contact": "wdcgeomag@bgs.ac.uk",
     "contactID": "Adam.Emsley@bgs.ac.uk",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/UNKNOWN",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -176,7 +246,7 @@
       "message": "OK"
     },
     "description": "Web API for the WDC at Edinburgh datasets. Data is offered at cadences of: minute, hour, day, month and year. K-index data is also available. Data are delivered on a best-quality basis, and converted on-the-fly to the requested orientation and file format. All data are definitive.",
-    "x_LastUpdateAttempt": "2026-05-13T15:05:10Z"
+    "x_LastUpdateAttempt": "2026-09-21T18:44:35Z"
   },
   {
     "x_url": "http://lasp.colorado.edu/lisird/hapi",
@@ -184,6 +254,10 @@
     "title": "LISIRD",
     "contact": "Doug Lindholm",
     "contactID": "Doug.Lindholm@lasp.colorado.edu",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/Doug.Lindholm",
+      "RepositoryID": "spase://SMWG/Repository/UCOLO/LASP/LISIRD"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -193,15 +267,37 @@
         "parameters": "mg_index"
       }
     },
-    "x_LastUpdateAttempt": "2026-05-13T15:05:11Z",
+    "x_LastUpdateAttempt": "2026-09-21T18:44:36Z",
     "x_LastUpdateError": "404 Client Error: Not Found for url: https://lasp.colorado.edu/lisird/hapi/about"
+  },
+  {
+    "x_url": "https://wdc.kugi.kyoto-u.ac.jp/hapi",
+    "id": "WDC-Kyoto-HAPI",
+    "title": "WDC for Geomagnetism, Kyoto HAPI Server",
+    "contact": "WDC for Geomagnetism, Kyoto <wdc-service@kugi.kyoto-u.ac.jp>",
+    "description": "HAPI server for the World Data Center for Geomagnetism, Kyoto. Provides geomagnetic indices and geomagnetic observatory data.",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/UNKNOWN",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
+    "HAPI": "3.3.1",
+    "status": {
+      "code": 1200,
+      "message": "OK"
+    },
+    "x_LastUpdateAttempt": "2026-09-21T18:44:38Z"
   },
   {
     "x_url": "https://hapi.spaceweather.knmi.nl/hapi",
     "id": "KNMI",
     "title": "KNMI public HAPI server for use with the space weather timeline viewer",
+    "description": "Data on this server has been obtained from a variety of sources, and reproduced based on open licenses and/or with express permission of the data owners. It is intended for quick-look visualization with the space weather timeline viewer only. For further analysis, users are advised to retrieve copies of the data from the data owner's repositories.",
     "contact": "Eelco Doornbos",
     "contactID": "eelco.doornbos@knmi.nl",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/Eelco.Doornbos",
+      "RepositoryID": "spase://SMWG/Repository/UNKNOWN"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -211,14 +307,13 @@
         "parameters": "density"
       }
     },
-    "description": "Data on this server has been obtained from a variety of sources, and reproduced based on open licenses and/or with express permission of the data owners. It is intended for quick-look visualization with the space weather timeline viewer only. For further analysis, users are advised to retrieve copies of the data from the data owner's repositories.",
     "citation": "",
     "HAPI": "3.1",
     "status": {
       "code": 1200,
       "message": "HAPI 1200: OK"
     },
-    "x_LastUpdateAttempt": "2026-05-13T15:05:11Z"
+    "x_LastUpdateAttempt": "2026-09-21T18:44:39Z"
   },
   {
     "x_url": "https://api.helioviewer.org/hapi/Helioviewer/hapi",
@@ -226,7 +321,11 @@
     "title": "Helioviewer",
     "contact": "Daniel Garcia Briseno",
     "contactID": "daniel.garciabriseno@nasa.gov",
-    "x_LastUpdateAttempt": "2026-05-13T15:05:11Z",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/Daniel.Garcia.Briseno",
+      "RepositoryID": "spase://SMWG/Repository/SDAC"
+    },
+    "x_LastUpdateAttempt": "2026-09-21T18:44:39Z",
     "x_LastUpdateError": "404 Client Error: Not Found for url: https://api.helioviewer.org/hapi/Helioviewer/hapi/about"
   },
   {
@@ -235,6 +334,10 @@
     "title": "DAS2",
     "contact": "Jeremy Faden",
     "contactID": "jeremy-faden@uiowa.edu",
+    "x_SPASE": {
+      "PersonID": "spase://SMWG/Person/Jeremy.Faden",
+      "RepositoryID": "spase://SMWG/Repository/UIowa/RadioPlasmaWaveGroup"
+    },
     "dataTest": {
       "name": "Ping Test",
       "query": {
@@ -244,7 +347,7 @@
         "parameters": "B_mag"
       }
     },
-    "x_LastUpdateAttempt": "2026-05-13T15:05:12Z",
+    "x_LastUpdateAttempt": "2026-09-21T18:44:40Z",
     "x_LastUpdateError": "Expecting value: line 1 column 1 (char 0)"
   }
 ]
