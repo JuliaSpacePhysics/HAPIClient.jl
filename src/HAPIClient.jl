@@ -8,7 +8,7 @@ import CSV
 using Tables
 using SpaceDataModel: AbstractDataVariable, parse_datetime
 using SpaceDataModel: name, units, meta
-import SpaceDataModel: times
+import SpaceDataModel: times, tdimnum
 
 export hapi, get_data, meta, times
 export HAPIVariable, HAPIVariables, Server, refresh_servers!

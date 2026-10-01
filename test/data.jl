@@ -109,4 +109,7 @@ end
     @test_nowarn hapi(server, dataset, parameters, tmin, tmax)
     @test_nowarn hapi(server, dataset, parameters, tmin, tmax; format = "json")
     @time hapi(server, dataset, parameters, tmin, tmax)
+
+    B = hapi(server, dataset, parameters, tmin, tmax).BGSEc
+    @test HAPIClient.tdimnum(B) == 1
 end
