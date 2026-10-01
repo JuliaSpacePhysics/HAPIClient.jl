@@ -15,6 +15,8 @@ struct HAPIVariable{T, N, A <: AbstractArray{T, N}, Tt <: AbstractVector, M <: A
     meta::M
 end
 
+tdimnum(::HAPIVariable) = 1
+
 """
 A thin wrapper over NamedTuple for HAPI variables that shares the same time axis.
 """
