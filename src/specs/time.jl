@@ -64,12 +64,12 @@ function parse_hapi_time(s::AbstractString)
         nfrac <= 9 || _invalid_time(s)
         ns = _read_digits(s, cu, i + 9, nfrac) * 10^(9 - nfrac)
     end
-    return HAPITime(y, m, d, H, M, S) + Nanosecond(ns)
+    return HAPITime(y, m, d, H, M, S, 0, 0, ns)
 end
 
 parse_hapi_time(t::Dates.TimeType) = HAPITime(t)
 
-# CSV parses `DEFAULT_DATE_FORMAT` natively (any 1–9 digit fraction) and leaves the column as strings
+# CSV ≥ 1 parses `DEFAULT_DATE_FORMAT` natively (any 1–9 digit fraction) and leaves the column as strings
 # when any row is in another HAPI form, e.g. SSCWeb's `2001-001T00:00:00Z`.
 hapi_times(t::AbstractVector{HAPITime}) = t
 hapi_times(t::AbstractVector) = parse_hapi_time.(t)
