@@ -6,7 +6,8 @@ import JSON
 using Dates
 import CSV
 using Tables
-using SpaceDataModel: AbstractDataVariable, parse_datetime
+using SpaceDataModel: AbstractDataVariable
+using Durations: Timestamp
 using SpaceDataModel: name, units, meta
 import SpaceDataModel: times, tdimnum
 

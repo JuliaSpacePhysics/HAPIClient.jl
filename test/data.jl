@@ -9,6 +9,7 @@
     @test data.Magnitude == data[1]
     @test length(data) == 2
     @test length(times(data)) == 225
+    @test eltype(times(data)) == HAPIClient.HAPITime
     @test meta(data[1])["name"] == "Magnitude"
     @test_nowarn display(data)
     @test unit(data.Magnitude) == u"nT"

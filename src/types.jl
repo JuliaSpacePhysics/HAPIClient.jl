@@ -76,7 +76,7 @@ colsize(param) = prod(get(param, "size", 1))
 Construct a `HAPIVariable` object from CSV.File `data` and `params` at index `i`.
 """
 function HAPIVariable(data::CSV.File, params, i::Integer)
-    time = to_datetime(Tables.getcolumn(data, 1))
+    time = hapi_times(Tables.getcolumn(data, 1))
     param = params[i + 1]
     size = colsize(param)
     coloffset = mapreduce(colsize, +, @view(params[1:i])) + 1
@@ -99,7 +99,7 @@ Construct a `HAPIVariable` object from a JSON-parsed Dict `d` (containing parame
 function HAPIVariable(d::AbstractDict, i::Integer)
     data = d["data"]
     param = d["parameters"][i + 1]
-    time = @. DateTime(getindex(data, 1), DEFAULT_DATE_FORMAT)
+    time = parse_hapi_time.(getindex.(data, 1))
     values = getindex.(data, i + 1)
     return HAPIVariable(values, time, SchemaDict(HAPISchema(), param))
 end

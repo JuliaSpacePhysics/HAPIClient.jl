@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+### Changed
+
+- Data time axes are `Timestamp{Nanosecond}` (from Durations.jl / the Dates stdlib on Julia 1.14+) instead of `DateTime`, preserving up to nanosecond precision in HAPI time strings, including day-of-year and truncated forms
+- Request times accept any `Dates.TimeType` and sub-millisecond strings; sub-millisecond digits are forwarded to the server
+
 ### Fixed
 
 - Implement `tdimnum` for `HAPIVariable` (time is the first dimension), so `SpaceDataModel` consumers no longer fall back to the last dimension

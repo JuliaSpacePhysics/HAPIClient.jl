@@ -126,7 +126,7 @@ f = Figure()
 for (i, var) in enumerate(data)
     m = meta(var)
     ax = Axis(f[i,1]; ylabel=m["name"], title=m["description"])
-    t = times(var)
+    t = DateTime.(times(var))  # Makie time axes do not support Timestamp yet
     for c in eachcol(var)
         lines!(t, c)
     end
