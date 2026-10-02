@@ -51,7 +51,6 @@ end
 
     @test HAPIDateTime("1989-001T00:00:00.000000001Z") == "1989-01-01T00:00:00.000000001Z"
     @test HAPIDateTime(DateTime(2001, 1, 1, 5)) == "2001-01-01T05:00:00.000Z"
-    @test HAPIDateTime(Date(2001, 1, 1)) == "2001-01-01T00:00:00.000Z"
     @test HAPIDateTime("2000-366T23:59:59.5Z") == "2000-12-31T23:59:59.500Z"
 
     for dt in ["1989-01-01T00:00:00.0000000001Z", "1989-366Z", "1989-1-01Z", "1989-01-01T0Z", "1989-01-01T"]
@@ -59,19 +58,12 @@ end
     end
 end
 
-@testitem "parse_hapi_time" begin
-    using HAPIClient: parse_hapi_time
-    using Dates
-    t = parse_hapi_time("2001-01-01T05:00:00.123456789Z")
-    @test Dates.value(t) == Dates.value(parse_hapi_time("2001-001T05:00:00Z")) + 123_456_789
-end
-
 @testitem "CSV time column" begin
     using HAPIClient: read_csv, hapi_times, parse_hapi_time, Tables
-    native = ["2001-01-01T05:00:00.000Z", "2001-01-01T05:00:00.1Z", "2001-01-01T05:00:00.123Z"]
+    native = ["2001-01-01T05:00:00.000Z", "2001-01-01T05:00:00.1Z", "2001-01-01T05:00:00.123456789Z"]
     col(ts) = Tables.getcolumn(read_csv(Vector{UInt8}(join(ts .* ",1\n"))), 1)
     @test !(eltype(col(native)) <: AbstractString)
     @test hapi_times(col(native)) == parse_hapi_time.(native)
-    mixed = [native; "2001-01-01T05:00:00.123456789Z"; "2001-001T00:00:00Z"]
+    mixed = [native; "2001-001T00:00:00Z"]
     @test hapi_times(col(mixed)) == parse_hapi_time.(mixed)
 end

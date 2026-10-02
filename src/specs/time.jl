@@ -32,7 +32,6 @@ function parse_hapi_time(s::AbstractString)
     n >= 4 || _invalid_time(s)
     y = _read_digits(s, cu, 1, 4)
     tpos = something(findnext(==(UInt8('T')), cu, 5), n + 1)
-    tpos > n + 1 && _invalid_time(s)
     dlen = tpos - 5
     m, d = if dlen == 0
         1, 1
@@ -55,7 +54,7 @@ function parse_hapi_time(s::AbstractString)
     i = tpos + 1
     tlen = n - tpos
     H = M = S = ns = 0
-    tlen >= 0 && !(tlen in (2, 5) || tlen >= 8) && _invalid_time(s)
+    tlen in (-1, 2, 5) || tlen >= 8 || _invalid_time(s)
     tlen >= 2 && (H = _read_digits(s, cu, i, 2))
     tlen >= 5 && (_expect(s, cu, i + 2, ':'); M = _read_digits(s, cu, i + 3, 2))
     tlen >= 8 && (_expect(s, cu, i + 5, ':'); S = _read_digits(s, cu, i + 6, 2))
