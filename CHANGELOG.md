@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## [0.2.7] - 2026-10-02
+
 ### Changed
 
 - Data time axes are `Timestamp{Nanosecond}` (from Durations.jl / the Dates stdlib on Julia 1.14+) instead of `DateTime`, preserving up to nanosecond precision in HAPI time strings, including day-of-year and truncated forms
