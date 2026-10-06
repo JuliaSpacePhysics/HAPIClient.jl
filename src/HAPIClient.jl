@@ -23,6 +23,7 @@ include("specs/time.jl")
 include("specs/parameter.jl")
 include("schema.jl")
 include("types.jl")
+include("parse.jl")
 
 """
 Main interface to HAPI servers and provides multiple dispatch for different use cases:
