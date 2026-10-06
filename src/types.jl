@@ -61,49 +61,5 @@ function Base.show(io::IO, m::MIME"text/plain", var::HAPIVariables)
     end
 end
 
-function HAPIVariables(data, params, meta, args...)
-    n = length(params) - 1
-    names = Tuple(Symbol(params[i + 1]["name"]) for i in 1:n)
-    values = (HAPIVariable(data, params, i) for i in 1:n)
-    return HAPIVariables(NamedTuple{names}(values), meta, args...)
-end
-
 colsize(param) = prod(get(param, "size", 1))
-
-"""
-    HAPIVariable(data, params, i)
-
-Construct a `HAPIVariable` object from CSV.File `data` and `params` at index `i`.
-"""
-function HAPIVariable(data::CSV.File, params, i::Integer)
-    time = hapi_times(Tables.getcolumn(data, 1))
-    param = params[i + 1]
-    size = colsize(param)
-    coloffset = mapreduce(colsize, +, @view(params[1:i])) + 1
-
-    values = if size == 1
-        Tables.getcolumn(data, coloffset)
-    else
-        stack(coloffset:(coloffset + size - 1)) do i
-            Tables.getcolumn(data, i)
-        end
-    end
-    return HAPIVariable(values, time, SchemaDict(HAPISchema(), param))
-end
-
-"""
-    HAPIVariable(d, i)
-
-Construct a `HAPIVariable` object from a JSON-parsed Dict `d` (containing parameters) at index `i`.
-"""
-function HAPIVariable(d::AbstractDict, i::Integer)
-    data = d["data"]
-    param = d["parameters"][i + 1]
-    time = parse_hapi_time.(getindex.(data, 1))
-    values = getindex.(data, i + 1)
-    return HAPIVariable(values, time, SchemaDict(HAPISchema(), param))
-end
-
-HAPIVariable(d::AbstractDict, meta, i::Integer) = HAPIVariable(d, i)
-
 colsize(var::HAPIVariable) = colsize(meta(var))

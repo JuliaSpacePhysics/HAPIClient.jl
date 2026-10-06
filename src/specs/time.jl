@@ -72,7 +72,7 @@ parse_hapi_time(t::Dates.TimeType) = HAPITime(t)
 # CSV ≥ 1 parses `DEFAULT_DATE_FORMAT` natively (any 1–9 digit fraction) and leaves the column as strings
 # when any row is in another HAPI form, e.g. SSCWeb's `2001-001T00:00:00Z`.
 hapi_times(t::AbstractVector{HAPITime}) = t
-hapi_times(t::AbstractVector) = parse_hapi_time.(t)
+hapi_times(t::AbstractVector) = HAPITime[parse_hapi_time(x) for x in t]
 
 """
     HAPIDateTime(t)
