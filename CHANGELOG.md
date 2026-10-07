@@ -2,6 +2,21 @@
 
 ## Unreleased
 
+## [0.3.0] - 2026-10-06
+
+### Changed
+
+- **Breaking**: Values equal to a parameter's `fill` read as `NaN` (opt out with `mask = false`), so an `integer` parameter with a `fill` reads as `Float64` ([#42](https://github.com/JuliaSpacePhysics/HAPIClient.jl/pull/42))
+- **Breaking**: `HAPIVariable(json::AbstractDict, i)` and `HAPIVariable(json, meta, i)` are replaced by `HAPIVariable(data, params, i)`, which takes a CSV table or a JSON response
+- Column types follow the parameter metadata instead of CSV.jl inference, so a `double` parameter is `Float64` in every time range and CSV and JSON responses give the same types
+- JSON responses parse about twice as fast for scalar parameters
+
+### Fixed
+
+- A time range without data returns empty variables instead of erroring, including CDAWeb's `1201` status reply to a CSV request
+- An error status in a JSON body with HTTP 200 throws instead of returning empty data
+- `integer` values written as `1.0` or `+3`, which the HAPI verifier accepts, parse as integers
+
 ## [0.2.7] - 2026-10-02
 
 ### Changed
