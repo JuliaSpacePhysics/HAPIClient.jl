@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## [0.2.8] - 2026-10-06
+
+### Changed
+
+- Allow SpaceDataModel 0.4
+
 ## [0.2.7] - 2026-10-02
 
 ### Changed
