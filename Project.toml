@@ -4,7 +4,7 @@ version = "0.2.7"
 authors = ["Zijin Zhang <zzj956959688@gmail.com> and contributors"]
 
 [workspace]
-projects = ["docs", "test"]
+projects = ["benchmark", "docs", "test"]
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
