@@ -19,6 +19,14 @@
     end
 end
 
+@testitem "time dimension" begin
+    using SpaceDataModel: timedim, dims
+    t = HAPIClient.hapi_times(["2001-01-01T00:00:00Z", "2001-01-01T00:00:16Z"])
+    v = HAPIVariable(rand(2, 3), t, Dict())
+    @test timedim(v) === t
+    @test dims(v) == (t, Base.OneTo(3))
+end
+
 @testitem "TestData2.0" begin
     server = "http://hapi-server.org/servers/TestData2.0/hapi"
     dataset = "dataset1"

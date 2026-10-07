@@ -9,7 +9,7 @@ using Tables
 using SpaceDataModel: AbstractDataVariable
 using Durations: Timestamp
 using SpaceDataModel: name, units, meta
-import SpaceDataModel: times, tdimnum
+import SpaceDataModel: times, tdimnum, dims
 
 export hapi, get_data, meta, times
 export HAPIVariable, HAPIVariables, Server, refresh_servers!

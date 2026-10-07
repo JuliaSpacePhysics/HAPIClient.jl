@@ -16,6 +16,7 @@ struct HAPIVariable{T, N, A <: AbstractArray{T, N}, Tt <: AbstractVector, M <: A
 end
 
 tdimnum(::HAPIVariable) = 1
+dims(v::HAPIVariable, i::Integer) = i == 1 ? v.time : axes(v, i)
 
 """
 A thin wrapper over NamedTuple for HAPI variables that shares the same time axis.
