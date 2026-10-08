@@ -29,12 +29,9 @@ Pkg.add("HAPIClient")
 using HAPIClient
 using Dates
 
-# Get data from CDAWeb
-dataset = "AC_H0_MFI"
-parameters = "Magnitude,BGSEc"
 start_time = DateTime(2001, 1, 1, 5, 0, 0)
 end_time = DateTime(2001, 1, 1, 6, 0, 0)
-data = hapi(CDAWeb, dataset, parameters, start_time, end_time)
+data = getdata(CDAWeb["AC_H0_MFI"][["Magnitude", "BGSEc"]], start_time, end_time)
 ```
 
 ## Navigation

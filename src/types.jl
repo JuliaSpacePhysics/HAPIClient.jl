@@ -46,6 +46,7 @@ Base.getproperty(x::HAPIVariables, s::Symbol) = getproperty(parent(x), s)
 Base.length(x::HAPIVariables) = length(parent(x))
 Base.iterate(x::HAPIVariables, args...) = iterate(parent(x), args...)
 Base.getindex(x::HAPIVariables, i) = getindex(parent(x), i)
+Base.getindex(x::HAPIVariables, name::AbstractString) = getindex(parent(x), Symbol(name))
 
 Base.show(io::IO, x::HAPIVariables) = show(io, parent(x))
 function Base.show(io::IO, m::MIME"text/plain", var::HAPIVariables)
