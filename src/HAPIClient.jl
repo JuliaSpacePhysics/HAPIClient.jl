@@ -6,12 +6,12 @@ import JSON
 using Dates
 import CSV
 using Tables
-using SpaceDataModel: AbstractDataVariable
+using SpaceDataModel: SpaceDataModel, AbstractDataVariable, AbstractDataset, DataSource, getdata, getmeta
 using Durations: Timestamp
 using SpaceDataModel: name, units, meta
 import SpaceDataModel: times, tdimnum, dims
 
-export hapi, get_data, meta, times
+export hapi, get_data, getdata, getmeta, meta, times
 export HAPIVariable, HAPIVariables, Server, refresh_servers!
 
 json_parse(x) = JSON.parse(String(x))
@@ -24,16 +24,11 @@ include("specs/parameter.jl")
 include("schema.jl")
 include("types.jl")
 include("parse.jl")
+include("datamodel.jl")
 
 """
-Main interface to HAPI servers and provides multiple dispatch for different use cases:
-
 - `hapi()` - List available HAPI servers ([`get_servers`](@ref))
-- `hapi(server)` - Get catalog of datasets from a server ([`get_catalog`](@ref))
-- `hapi(server, dataset)` - Get parameter information for a dataset ([`get_parameters`](@ref))
 - `hapi(server, dataset, parameters)` - Get parameter information for specific parameters ([`get_parameters`](@ref))
-- `hapi(server, dataset, tmin, tmax)` - Get all data for a dataset in a time range ([`get_data`](@ref))
-- `hapi(server, dataset, parameters, tmin, tmax)` - Get specific parameter data in a time range ([`get_data`](@ref))
 """
 function hapi end
 

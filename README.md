@@ -16,37 +16,23 @@ using Dates
 # List available HAPI servers
 servers = hapi()
 
-# Use a predefined server (CDAWeb or CSA)
-# Get catalog of available datasets from CDAWeb
-catalog = hapi(CDAWeb)
+# A server is a catalog of datasets
+filter(contains("AC_H0"), keys(CDAWeb))   # dataset ids
+ds = CDAWeb["AC_H0_MFI"]                  # a dataset
+keys(ds)                                  # parameter names
+getmeta(ds)                               # HAPI info response
+getmeta(ds["Magnitude"])                  # the parameter's info entry
 
-# Get information about parameters in a dataset
-dataset = "AC_H0_MFI"
-params = hapi(CDAWeb, dataset)
-
-# Retrieve data for specific parameters within a time range
-parameters = "Magnitude,BGSEc"
 tmin = DateTime(2001, 1, 1, 5, 0, 0)
 tmax = DateTime(2001, 1, 1, 6, 0, 0)
-data = hapi(CDAWeb, dataset, parameters, tmin, tmax)
+var = getdata(ds["Magnitude"], tmin, tmax)                # a HAPIVariable
+data = getdata(ds[["Magnitude", "BGSEc"]], tmin, tmax)    # HAPIVariables, one request
+data = getdata(ds, tmin, tmax)                            # all parameters
+data["BGSEc"]
 
-# Alternative method using path format
-data = get_data("CDAWeb/AC_H0_MFI/Magnitude,BGSEc", tmin, tmax)
-```
-
-Recommended way to access the data and variable properties:
-
-```julia
-Magnitude = data[1]
-BGSEc = data[2]
-
-var = data[1]
-# to retrieve the values
-parent(var)
-# to retrieve the timestamps
-times(var)
-# to retrieve the metadata
-meta(var)
+parent(var)   # values
+times(var)    # timestamps
+getmeta(var)  # metadata
 ```
 
 ## Elsewhere

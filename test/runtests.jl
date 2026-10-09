@@ -23,6 +23,20 @@ end
     @test attrs[:desc] isa AbstractString
 end
 
+@testitem "Server registry" begin
+    using SpaceDataModel: Testing
+    ds = HAPIClient.CDAWeb["AC_H0_MFI"]
+    @test "AC_H0_MFI" in keys(HAPIClient.CDAWeb)
+    @test "Magnitude" in keys(ds)
+    Testing.test_dataset(ds, "Magnitude", "2001-01-01T05", "2001-01-01T06")
+    data = getdata(ds[["Magnitude", "BGSEc"]], "2001-01-01T05", "2001-01-01T06")
+    @test data isa HAPIVariables
+    @test length(data) == 2
+    @test size(data["BGSEc"], 2) == 3
+
+    @test getmeta(ds["BGSEc"]) == getmeta(data["BGSEc"])
+end
+
 @testitem "DateTime" begin
     using HAPIClient: HAPIDateTime
     using Dates
