@@ -1,12 +1,17 @@
 # Changelog
 
-## Unreleased
+## [0.3.2] - 2026-10-21
 
 ### Added
 
 - Servers and datasets follow SpaceDataModel's interface: `keys(server)` lists dataset ids, `server[id]` is a dataset, `keys(ds)` lists parameter names, and `getdata(ds[name], tmin, tmax)` returns a `HAPIVariable`
-- `getdata(ds[[name1, name2]], tmin, tmax)` fetches several parameters in one request as `HAPIVariables`
-- `getmeta(ds[name])` returns the parameter's info entry; info responses are cached for the session
+- `getdata(ds[[name1, name2]], tmin, tmax)` fetches several parameters in one request as `HAPIVariables`; `getdata(ds, tmin, tmax)` fetches all parameters
+- `getmeta(ds)` returns the dataset's info response and `getmeta(ds[name])` the parameter's info entry; info responses and catalogs are cached for the session
+- `HAPIVariables` can be indexed by parameter name as a string, e.g. `data["BGSEc"]`
+
+### Changed
+
+- Compatible with SpaceDataModel 0.5 and 0.6
 
 ## [0.3.0] - 2026-10-06
 
